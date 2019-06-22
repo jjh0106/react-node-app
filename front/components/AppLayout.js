@@ -1,26 +1,39 @@
 import React from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
-import { Menu, Input, Button } from 'antd';
+import { Menu, Input, Row, Col } from 'antd';
+import LoginForm from './LoginForm';
+import UserProfile from './UserProfile';
+import { useSelector } from 'react-redux';
 
 const AppLayout = ({ children }) => {
-  return (
-    <div>
-      <Menu mode="horizontal">
-        <Menu.Item key="home"><Link href="/"><a>JsnBird</a></Link></Menu.Item>
-        <Menu.Item key="profile"><Link href="/profile"><a>Profile</a></Link></Menu.Item>
-        <Menu.Item key="mail">
-          <Input.Search enterButton style={{ verticalAlign: 'middle' }} />
-        </Menu.Item>
-      </Menu>
-      <Link href="/signup"><a><Button>회원가입</Button></a></Link>
-      { children }
-    </div>
-  )
+    const { isLoggedIn } = useSelector(state => state.user);
+    return (
+        <div>
+            <Menu mode="horizontal">
+                <Menu.Item key="home"><Link href="/"><a>JsnBird</a></Link></Menu.Item>
+                <Menu.Item key="profile"><Link href="/profile"><a>Profile</a></Link></Menu.Item>
+                <Menu.Item key="mail">
+                    <Input.Search enterButton style={{ verticalAlign: 'middle' }} />
+                </Menu.Item>
+            </Menu>
+            <Row>
+                <Col xs={24} md={6}>
+                    { isLoggedIn ? <UserProfile /> : <LoginForm /> }   
+                </Col>
+                <Col xs={24} md={12}>
+                    { children }
+                </Col>
+                <Col xs={24} md={6}>
+
+                </Col>
+            </Row>
+        </div>
+    );
 };
 
 AppLayout.propTypes = {
-  children:  PropTypes.node,
+    children:  PropTypes.node,
 };
 
 export default AppLayout;

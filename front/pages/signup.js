@@ -1,24 +1,23 @@
 import React, { useState, useCallback } from 'react';
 import { Form, Input, Checkbox, Button } from 'antd';
 
+// custom hook
+export const useInput = (initValue=null) => {
+    const [value, setter] = useState(initValue);
+    const handler = useCallback((e) => {
+        setter(e.target.value);
+    }, []);
+    return [value, handler];
+};
+
 const Signup = () => {
+    const [id, onChageId] = useInput('');
+    const [nick, onChageNick] = useInput('');
+    const [password, onChagePassword] = useInput('');
     const [passwordCheck, setPasswordCheck] = useState('');
     const [term, setTerm] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
     const [termError, setTermError] = useState(false);
-
-    // custom hook
-    const useInput = (initValue=null) => {
-        const [value, setter] = useState(initValue);
-        const handler = useCallback((e) => {
-            setter(e.target.value);
-        }, []);
-        return [value, handler];
-    };
-
-    const [id, onChageId] = useInput('');
-    const [nick, onChageNick] = useInput('');
-    const [password, onChagePassword] = useInput('');
 
     const onSubmit = useCallback((e) => {
         e.preventDefault();
