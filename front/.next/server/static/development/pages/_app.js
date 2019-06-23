@@ -1494,8 +1494,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! antd */ "antd");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _reducers_user__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../reducers/user */ "./reducers/user.js");
 
 var _jsxFileName = "/Users/jsn/Desktop/react-node-app/front/pages/signup.js";
+
+
 
  // custom hook
 
@@ -1549,6 +1554,7 @@ var Signup = function Signup() {
       termError = _useState10[0],
       setTermError = _useState10[1];
 
+  var dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["useDispatch"])();
   var onSubmit = Object(react__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function (e) {
     e.preventDefault();
 
@@ -1559,6 +1565,12 @@ var Signup = function Signup() {
     if (!term) {
       return setTermError(true);
     }
+
+    dispatch(Object(_reducers_user__WEBPACK_IMPORTED_MODULE_4__["signupAction"])({
+      id: id,
+      password: password,
+      nick: nick
+    }));
   }, [password, passwordCheck, term]);
   var onChagePasswordCheck = Object(react__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function (e) {
     setPasswordError(e.target.value !== password);
@@ -1572,20 +1584,20 @@ var Signup = function Signup() {
     onSubmit: onSubmit,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 43
+      lineNumber: 52
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 44
+      lineNumber: 53
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "user-id",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 45
+      lineNumber: 54
     },
     __self: this
   }, "\uC544\uC774\uB514"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_2__["Input"], {
@@ -1595,20 +1607,20 @@ var Signup = function Signup() {
     onChange: onChageId,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 46
+      lineNumber: 55
     },
     __self: this
   })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 48
+      lineNumber: 57
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "user-nick",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 49
+      lineNumber: 58
     },
     __self: this
   }, "\uB2C9\uB124\uC784"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_2__["Input"], {
@@ -1618,20 +1630,20 @@ var Signup = function Signup() {
     onChange: onChageNick,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 50
+      lineNumber: 59
     },
     __self: this
   })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 52
+      lineNumber: 61
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "user-password",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 53
+      lineNumber: 62
     },
     __self: this
   }, "\uBE44\uBC00\uBC88\uD638"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_2__["Input"], {
@@ -1642,20 +1654,20 @@ var Signup = function Signup() {
     onChange: onChagePassword,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 54
+      lineNumber: 63
     },
     __self: this
   })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 56
+      lineNumber: 65
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "user-password-check",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 57
+      lineNumber: 66
     },
     __self: this
   }, "\uBE44\uBC00\uBC88\uD638 \uCCB4\uD06C"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_2__["Input"], {
@@ -1666,7 +1678,7 @@ var Signup = function Signup() {
     onChange: onChagePasswordCheck,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 58
+      lineNumber: 67
     },
     __self: this
   }), passwordError && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -1675,13 +1687,13 @@ var Signup = function Signup() {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 59
+      lineNumber: 68
     },
     __self: this
   }, "\uBE44\uBC00\uBC88\uD638\uAC00 \uC77C\uCE58\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 61
+      lineNumber: 70
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_2__["Checkbox"], {
@@ -1690,7 +1702,7 @@ var Signup = function Signup() {
     onChange: onChangeTerm,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 62
+      lineNumber: 71
     },
     __self: this
   }, "\uC57D\uAD00 \uB3D9\uC758"), termError && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -1699,13 +1711,13 @@ var Signup = function Signup() {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 63
+      lineNumber: 72
     },
     __self: this
   }, "\uC57D\uAD00\uC5D0 \uB3D9\uC758\uD574 \uC8FC\uC2DC\uAE30 \uBC14\uB78D\uB2C8\uB2E4.")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 65
+      lineNumber: 74
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_2__["Button"], {
@@ -1713,7 +1725,7 @@ var Signup = function Signup() {
     htmlType: "submit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 66
+      lineNumber: 75
     },
     __self: this
   }, "\uAC00\uC785")));
@@ -1820,14 +1832,16 @@ var reducer = function reducer() {
 /*!**************************!*\
   !*** ./reducers/user.js ***!
   \**************************/
-/*! exports provided: initialState, LOG_IN, LOG_OUT, loginAction, logoutAction, default */
+/*! exports provided: initialState, SIGN_UP, LOG_IN, LOG_OUT, signupAction, loginAction, logoutAction, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initialState", function() { return initialState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SIGN_UP", function() { return SIGN_UP; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_IN", function() { return LOG_IN; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_OUT", function() { return LOG_OUT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signupAction", function() { return signupAction; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loginAction", function() { return loginAction; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logoutAction", function() { return logoutAction; });
 /* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
@@ -1836,14 +1850,22 @@ var dummyUser = {
   nickname: '재호정',
   Post: [],
   Followings: [],
-  Followers: []
+  Followers: [],
+  signupData: {}
 };
 var initialState = {
   isLoggedIn: false,
   user: null
 };
+var SIGN_UP = 'SIGN_UP';
 var LOG_IN = 'LOG_IN';
 var LOG_OUT = 'LOG_OUT';
+var signupAction = function signupAction(data) {
+  return {
+    type: SIGN_UP,
+    data: data
+  };
+};
 var loginAction = {
   type: LOG_IN
 };
@@ -1869,6 +1891,13 @@ var reducer = function reducer() {
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
           isLoggedIn: false,
           user: null
+        });
+      }
+
+    case SIGN_UP:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+          signupData: action.data
         });
       }
 
