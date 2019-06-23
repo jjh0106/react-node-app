@@ -20,7 +20,6 @@ const Signup = () => {
     const [term, setTerm] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
     const [termError, setTermError] = useState(false);
-
     const dispatch = useDispatch();
 
     const onSubmit = useCallback((e) => {
