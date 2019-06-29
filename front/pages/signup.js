@@ -1,6 +1,7 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Form, Input, Checkbox, Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
+import Router from 'next/router';
 import { signupRequestAction } from '../reducers/user';
 
 // custom hook
@@ -21,7 +22,14 @@ const Signup = () => {
     const [passwordError, setPasswordError] = useState(false);
     const [termError, setTermError] = useState(false);
     const dispatch = useDispatch();
-    const { isSigningUp } = useSelector(state => state.user);
+    const { isSigningUp, me } = useSelector(state => state.user);
+
+    // 객체는 useEffect에 넣어주지 않는 것이 좋다.
+    useEffect(() => {
+        if(me){
+            Router.push('/');
+        }
+    }, [me && me.id]);
 
     const onSubmit = useCallback((e) => {
         e.preventDefault();
