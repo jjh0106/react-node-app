@@ -40,11 +40,11 @@ const Signup = () => {
             return setTermError(true);
         }
         dispatch(signupRequestAction({
-            id,
+            userId: id,
             password,
-            nick
+            nickname: nick,
         }));
-    }, [id, password, passwordCheck, nick, term]);
+    }, [id, nick, password, passwordCheck, term]);
 
     const onChagePasswordCheck = useCallback((e) => {
         setPasswordError(e.target.value !== password);

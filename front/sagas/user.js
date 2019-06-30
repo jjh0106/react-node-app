@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { takeLatest, takeEvery, all, fork, call, put, take, delay, race, cancel, throttle, select } from 'redux-saga/effects';
 import { 
     LOG_IN_REQUEST, 
@@ -20,8 +21,8 @@ function logoutAPI(){
     
 }
 
-function signupAPI(){
-
+function signupAPI(data){
+    return axios.post('http://localhost:3065/api/user/', data);
 }
 //////////////////////////// API 호출::End ////////////////////////////
 
@@ -58,11 +59,9 @@ function* logout(){
     }
 }
 
-function* signup(){
+function* signup(action){ 
     try {
-        // yield call(signupAPI);
-        yield delay(2000);
-        throw new Error('에러');
+        yield call(signupAPI, action.data); // action.data에는 컴포넌트에서 디스패치한 userId, password, nickname가 들어있다.
         yield put({
             type: SIGN_UP_SUCCESS,
         });

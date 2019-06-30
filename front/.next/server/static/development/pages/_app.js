@@ -1624,11 +1624,11 @@ var Signup = function Signup() {
     }
 
     dispatch(Object(_reducers_user__WEBPACK_IMPORTED_MODULE_5__["signupRequestAction"])({
-      id: id,
+      userId: id,
       password: password,
-      nick: nick
+      nickname: nick
     }));
-  }, [id, password, passwordCheck, nick, term]);
+  }, [id, nick, password, passwordCheck, term]);
   var onChagePasswordCheck = Object(react__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function (e) {
     setPasswordError(e.target.value !== password);
     setPasswordCheck(e.target.value);
@@ -2432,9 +2432,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return userSaga; });
 /* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/regenerator */ "./node_modules/@babel/runtime-corejs2/regenerator/index.js");
 /* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-saga/effects */ "redux-saga/effects");
-/* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _reducers_user__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../reducers/user */ "./reducers/user.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux-saga/effects */ "redux-saga/effects");
+/* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _reducers_user__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../reducers/user */ "./reducers/user.js");
 
 
 var _marked =
@@ -2460,13 +2462,16 @@ _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(w
 _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(userSaga);
 
 
+
  //////////////////////////// API 호출::Begin ////////////////////////////
 
 function loginAPI() {}
 
 function logoutAPI() {}
 
-function signupAPI() {} //////////////////////////// API 호출::End ////////////////////////////
+function signupAPI(data) {
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://localhost:3065/api/user/', data);
+} //////////////////////////// API 호출::End ////////////////////////////
 //////////////////////////// Dispatch::Begin ////////////////////////////
 
 
@@ -2477,13 +2482,13 @@ function login() {
         case 0:
           _context.prev = 0;
           _context.next = 3;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["delay"])(2000);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["delay"])(2000);
 
         case 3:
           _context.next = 5;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
             // put은 dispatch와 동일.
-            type: _reducers_user__WEBPACK_IMPORTED_MODULE_2__["LOG_IN_SUCCESS"]
+            type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOG_IN_SUCCESS"]
           });
 
         case 5:
@@ -2495,8 +2500,8 @@ function login() {
           _context.t0 = _context["catch"](0);
           console.error(_context.t0);
           _context.next = 12;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-            type: _reducers_user__WEBPACK_IMPORTED_MODULE_2__["LOG_IN_FAILURE"]
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
+            type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOG_IN_FAILURE"]
           });
 
         case 12:
@@ -2514,12 +2519,12 @@ function logout() {
         case 0:
           _context2.prev = 0;
           _context2.next = 3;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(logoutAPI);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(logoutAPI);
 
         case 3:
           _context2.next = 5;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-            type: _reducers_user__WEBPACK_IMPORTED_MODULE_2__["LOG_OUT_SUCCESS"]
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
+            type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOG_OUT_SUCCESS"]
           });
 
         case 5:
@@ -2531,8 +2536,8 @@ function logout() {
           _context2.t0 = _context2["catch"](0);
           console.log(_context2.t0);
           _context2.next = 12;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-            type: _reducers_user__WEBPACK_IMPORTED_MODULE_2__["LOG_OUT_FAILURE"]
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
+            type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOG_OUT_FAILURE"]
           });
 
         case 12:
@@ -2543,38 +2548,41 @@ function logout() {
   }, _marked2, null, [[0, 7]]);
 }
 
-function signup() {
+function signup(action) {
   return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function signup$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
           _context3.prev = 0;
           _context3.next = 3;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["delay"])(2000);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(signupAPI, action.data);
 
         case 3:
-          throw new Error('에러');
+          _context3.next = 5;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
+            type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["SIGN_UP_SUCCESS"]
+          });
 
-        case 6:
-          _context3.next = 13;
+        case 5:
+          _context3.next = 12;
           break;
 
-        case 8:
-          _context3.prev = 8;
+        case 7:
+          _context3.prev = 7;
           _context3.t0 = _context3["catch"](0);
           console.log(_context3.t0);
-          _context3.next = 13;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])({
-            type: _reducers_user__WEBPACK_IMPORTED_MODULE_2__["SIGN_UP_FAILURE"],
+          _context3.next = 12;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
+            type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["SIGN_UP_FAILURE"],
             error: _context3.t0
           });
 
-        case 13:
+        case 12:
         case "end":
           return _context3.stop();
       }
     }
-  }, _marked3, null, [[0, 8]]);
+  }, _marked3, null, [[0, 7]]);
 } //////////////////////////// Dispatch::End //////////////////////////// 
 //////////////////////////// Watch::Begin ////////////////////////////
 
@@ -2585,7 +2593,7 @@ function watchLogin() {
       switch (_context4.prev = _context4.next) {
         case 0:
           _context4.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_reducers_user__WEBPACK_IMPORTED_MODULE_2__["LOG_IN_REQUEST"], login);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])(_reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOG_IN_REQUEST"], login);
 
         case 2:
         case "end":
@@ -2601,7 +2609,7 @@ function watchLogout() {
       switch (_context5.prev = _context5.next) {
         case 0:
           _context5.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_reducers_user__WEBPACK_IMPORTED_MODULE_2__["LOG_OUT_REQUEST"], logout);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])(_reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOG_OUT_REQUEST"], logout);
 
         case 2:
         case "end":
@@ -2617,7 +2625,7 @@ function watchSignup() {
       switch (_context6.prev = _context6.next) {
         case 0:
           _context6.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_reducers_user__WEBPACK_IMPORTED_MODULE_2__["SIGN_UP_REQUEST"], signup);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])(_reducers_user__WEBPACK_IMPORTED_MODULE_3__["SIGN_UP_REQUEST"], signup);
 
         case 2:
         case "end":
@@ -2635,7 +2643,7 @@ function userSaga() {
       switch (_context7.prev = _context7.next) {
         case 0:
           _context7.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchLogin), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchLogout), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(watchSignup)]);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchLogin), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchLogout), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchSignup)]);
 
         case 2:
         case "end":
@@ -2669,6 +2677,17 @@ module.exports = __webpack_require__(/*! private-next-pages/_app.js */"./pages/_
 /***/ (function(module, exports) {
 
 module.exports = require("antd");
+
+/***/ }),
+
+/***/ "axios":
+/*!************************!*\
+  !*** external "axios" ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("axios");
 
 /***/ }),
 
