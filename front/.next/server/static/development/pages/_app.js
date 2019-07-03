@@ -302,7 +302,7 @@ var LoginForm = function LoginForm() {
   var onSubmitForm = Object(react__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function (e) {
     e.preventDefault();
     dispatch(Object(_reducers_user__WEBPACK_IMPORTED_MODULE_6__["loginRequestAction"])({
-      id: id,
+      userId: id,
       password: password
     }));
   }, [id, password]);
@@ -1609,6 +1609,7 @@ var Signup = function Signup() {
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     if (me) {
+      alert('!');
       next_router__WEBPACK_IMPORTED_MODULE_4___default.a.push('/');
     }
   }, [me && me.id]);
@@ -1641,20 +1642,20 @@ var Signup = function Signup() {
     onSubmit: onSubmit,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 60
+      lineNumber: 61
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 61
+      lineNumber: 62
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "user-id",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 62
+      lineNumber: 63
     },
     __self: this
   }, "\uC544\uC774\uB514"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_2__["Input"], {
@@ -1664,20 +1665,20 @@ var Signup = function Signup() {
     onChange: onChageId,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 63
+      lineNumber: 64
     },
     __self: this
   })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 65
+      lineNumber: 66
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "user-nick",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 66
+      lineNumber: 67
     },
     __self: this
   }, "\uB2C9\uB124\uC784"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_2__["Input"], {
@@ -1687,20 +1688,20 @@ var Signup = function Signup() {
     onChange: onChageNick,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 67
+      lineNumber: 68
     },
     __self: this
   })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 69
+      lineNumber: 70
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "user-password",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 70
+      lineNumber: 71
     },
     __self: this
   }, "\uBE44\uBC00\uBC88\uD638"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_2__["Input"], {
@@ -1711,20 +1712,20 @@ var Signup = function Signup() {
     onChange: onChagePassword,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 71
+      lineNumber: 72
     },
     __self: this
   })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 73
+      lineNumber: 74
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "user-password-check",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 74
+      lineNumber: 75
     },
     __self: this
   }, "\uBE44\uBC00\uBC88\uD638 \uCCB4\uD06C"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_2__["Input"], {
@@ -1735,7 +1736,7 @@ var Signup = function Signup() {
     onChange: onChagePasswordCheck,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 75
+      lineNumber: 76
     },
     __self: this
   }), passwordError && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -1744,13 +1745,13 @@ var Signup = function Signup() {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 76
+      lineNumber: 77
     },
     __self: this
   }, "\uBE44\uBC00\uBC88\uD638\uAC00 \uC77C\uCE58\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 78
+      lineNumber: 79
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_2__["Checkbox"], {
@@ -1759,7 +1760,7 @@ var Signup = function Signup() {
     onChange: onChangeTerm,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 79
+      lineNumber: 80
     },
     __self: this
   }, "\uC57D\uAD00 \uB3D9\uC758"), termError && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -1768,13 +1769,13 @@ var Signup = function Signup() {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 80
+      lineNumber: 81
     },
     __self: this
   }, "\uC57D\uAD00\uC5D0 \uB3D9\uC758\uD574 \uC8FC\uC2DC\uAE30 \uBC14\uB78D\uB2C8\uB2E4.")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 82
+      lineNumber: 83
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_2__["Button"], {
@@ -1783,7 +1784,7 @@ var Signup = function Signup() {
     loading: isSigningUp,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 83
+      lineNumber: 84
     },
     __self: this
   }, "\uAC00\uC785")));
@@ -2151,7 +2152,7 @@ var reducer = function reducer() {
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
           isLoggingIn: false,
           isLoggedIn: true,
-          me: dummyUser
+          me: action.data
         });
       }
 
@@ -2463,53 +2464,61 @@ _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(u
 
 
 
- //////////////////////////// API 호출::Begin ////////////////////////////
 
-function loginAPI() {}
+axios__WEBPACK_IMPORTED_MODULE_1___default.a.defaults.baseURL = 'http://localhost:3065/api'; //////////////////////////// API 호출::Begin ////////////////////////////
+
+function loginAPI(data) {
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/user/login/', data, {
+    withCredentials: true
+  });
+}
 
 function logoutAPI() {}
 
 function signupAPI(data) {
-  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://localhost:3065/api/user/', data);
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/user/', data);
 } //////////////////////////// API 호출::End ////////////////////////////
 //////////////////////////// Dispatch::Begin ////////////////////////////
 
 
-function login() {
+function login(action) {
+  var result;
   return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function login$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           _context.prev = 0;
           _context.next = 3;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["delay"])(2000);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(loginAPI, action.data);
 
         case 3:
-          _context.next = 5;
+          result = _context.sent;
+          _context.next = 6;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
             // put은 dispatch와 동일.
-            type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOG_IN_SUCCESS"]
+            type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOG_IN_SUCCESS"],
+            data: result.data
           });
 
-        case 5:
-          _context.next = 12;
+        case 6:
+          _context.next = 13;
           break;
 
-        case 7:
-          _context.prev = 7;
+        case 8:
+          _context.prev = 8;
           _context.t0 = _context["catch"](0);
           console.error(_context.t0);
-          _context.next = 12;
+          _context.next = 13;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
             type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOG_IN_FAILURE"]
           });
 
-        case 12:
+        case 13:
         case "end":
           return _context.stop();
       }
     }
-  }, _marked, null, [[0, 7]]);
+  }, _marked, null, [[0, 8]]);
 }
 
 function logout() {

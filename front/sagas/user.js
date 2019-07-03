@@ -10,19 +10,34 @@ import {
     SIGN_UP_REQUEST,
     SIGN_UP_FAILURE,
     SIGN_UP_SUCCESS,
+    LOAD_USER_SUCCESS,
+    LOAD_USER_FAILURE,
+    LOAD_USER_REQUEST,
  } from '../reducers/user';
 
+ axios.defaults.baseURL = 'http://localhost:3065/api';
+
 //////////////////////////// API 호출::Begin ////////////////////////////
-function loginAPI(){
- 
+function loginAPI(data){
+    return axios.post('/user/login/', data, {
+        withCredentials: true,
+    });
 }
 
 function logoutAPI(){
-    
+    return axios.post('/user/logout/', {}, {
+        withCredentials: true,
+    });
 }
 
 function signupAPI(data){
-    return axios.post('http://localhost:3065/api/user/', data);
+    return axios.post('/user/', data);
+}
+
+function loadUserAPI(dta){
+    return axios.get('/user/', {
+        withCredentials: true,
+    });
 }
 //////////////////////////// API 호출::End ////////////////////////////
 
@@ -30,12 +45,12 @@ function signupAPI(data){
 
 
 //////////////////////////// Dispatch::Begin ////////////////////////////
-function* login(){
+function* login(action){
     try {
-        // yield call(loginAPI);
-        yield delay(2000);
+        const result = yield call(loginAPI, action.data);
         yield put({ // put은 dispatch와 동일.
             type: LOG_IN_SUCCESS,
+            data: result.data,
         });
     } catch(e) {
         console.error(e);
@@ -73,6 +88,22 @@ function* signup(action){
         });
     }
 }
+
+function* loadUser(){ 
+    try {
+        const result = yield call(loadUserAPI); 
+        yield put({
+            type: LOAD_USER_SUCCESS,
+            data: result.data,
+        });
+    } catch(e) {
+        console.log(e);
+        yield put({
+            type: LOAD_USER_FAILURE,
+            error: e,
+        });
+    }
+}
 //////////////////////////// Dispatch::End //////////////////////////// 
 
 
@@ -90,6 +121,10 @@ function* watchLogout(){
 function* watchSignup(){
     yield takeLatest(SIGN_UP_REQUEST, signup)
 }
+
+function* watchLoadUser(){
+    yield takeLatest(LOAD_USER_REQUEST, loadUser)
+}
 //////////////////////////// Watch::End ////////////////////////////
 
 
@@ -101,6 +136,7 @@ export default function* userSaga(){
         fork(watchLogin),
         fork(watchLogout),
         fork(watchSignup),
+        fork(watchLoadUser),
     ]);
 }
 
