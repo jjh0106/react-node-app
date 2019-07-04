@@ -15,8 +15,6 @@ import {
     LOAD_USER_REQUEST,
  } from '../reducers/user';
 
- axios.defaults.baseURL = 'http://localhost:3065/api';
-
 //////////////////////////// API 호출::Begin ////////////////////////////
 function loginAPI(data){
     return axios.post('/user/login/', data, {
