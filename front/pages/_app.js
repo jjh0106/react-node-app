@@ -9,7 +9,7 @@ import createSagaMiddleware from 'redux-saga';
 import reducer from '../reducers';
 import rootSaga from '../sagas';
 
-const JsnBird = ({ Component, store }) => {
+const JsnBird = ({ Component, store, pageProps }) => {
     return (
         <Provider store={store}>
             <Head>
@@ -17,16 +17,28 @@ const JsnBird = ({ Component, store }) => {
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/3.19.0/antd.css" />
             </Head>
             <AppLayout> {/* props로 하위 jsx를 전달 */}
-                <Component />
+                <Component {...pageProps} />
             </AppLayout>                
         </Provider>
     );
 };
 
 JsnBird.propTypes = {
-    Component: PropTypes.elementType,
-    store: PropTypes.object,
-}
+    Component: PropTypes.elementType.isRequired,
+    store: PropTypes.object.isRequired,
+    pageProps: PropTypes.object.isRequired,
+};
+
+JsnBird.getInitialProps = async (context) => {
+    console.log(context);
+    const { ctx } = context;
+    let pageProps = {};
+
+    if( context.Component.getInitialProps ){
+        pageProps = await context.Component.getInitialProps(ctx);
+    }
+    return { pageProps };
+};
 
 const configureStore = (initialState, options) => {
     const sagaMiddleware = createSagaMiddleware();

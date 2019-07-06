@@ -1,6 +1,6 @@
 const express = require('express');
 const next = require('next');
-const morgran = require('morgan');
+const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const expressSession = require('express-session');
 const dotenv = require('dotenv');
@@ -26,6 +26,14 @@ app.prepare().then(() => {
             secure: false,
         },
     }));
+
+    server.get('/hashtag/:tag', (req, res) => {
+        return app.render(req, res, '/hashtag', { tag: req.params.tag });
+    });
+
+    server.get('/user/:id', (req, res) => {
+        return app.render(req, res, '/user', { id: req.params.id });
+    });
 
     server.get('*', (req, res) => {
         return handle(req, res);

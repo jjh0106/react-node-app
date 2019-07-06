@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { all, fork, takeLatest, put, delay } from 'redux-saga/effects';
+import { all, fork, takeLatest, put, delay, call } from 'redux-saga/effects';
 import { 
     ADD_POST_REQUEST,
     ADD_POST_FAILURE,
@@ -18,8 +18,10 @@ function addPostAPI(data){
     });
 }
 
-function addCommentAPI(){
-
+function addCommentAPI(data){
+    return axios.post('/post/comment', data, {
+        withCredentials: true,
+    });
 }
 
 function loadMainPostsAPI(){
@@ -42,13 +44,13 @@ function* addPost(action){
     }
 }
 
-function* addComment(action){ // postCard에서 보낸 data
+function* addComment(action){ 
     try {
-        yield delay(2000);
+        yield call(addCommentAPI, action.data);
         yield put({
             type: ADD_COMMENT_SUCCESS,
             data: {
-                postId: action.data.postId
+                comment: action.data.comment
             },
         });
     } catch(e) {
