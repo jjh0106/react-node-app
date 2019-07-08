@@ -10,6 +10,12 @@ import {
     LOAD_MAIN_POSTS_REQUEST,
     LOAD_MAIN_POSTS_SUCCESS,
     LOAD_MAIN_POSTS_FAILURE,
+    LOAD_USER_POSTS_REQUEST,
+    LOAD_HASHTAG_POSTS_REQUEST,
+    LOAD_USER_POSTS_SUCCESS,
+    LOAD_USER_POSTS_FAILURE,
+    LOAD_HASHTAG_POSTS_SUCCESS,
+    LOAD_HASHTAG_POSTS_FAILURE,
  } from '../reducers/post';
 
 function addPostAPI(data){
@@ -26,6 +32,14 @@ function addCommentAPI(data){
 
 function loadMainPostsAPI(){
     return axios.get('/posts');
+}
+
+function loadUserPostsAPI(id){
+    return axios.get(`/user/${id}/posts`);
+}
+
+function loadHashtagPostsAPI(tag){
+    return axios.get(`/hashtag/${tag}`);
 }
 
 function* addPost(action){
@@ -78,6 +92,38 @@ function* loadMainPosts(){
     }
 }
 
+function* loadUserPosts(action){
+    try {
+        const result = yield call(loadUserPostsAPI, action.data);
+        yield put({
+            type: LOAD_USER_POSTS_SUCCESS,
+            data: result.data,
+        });
+    } catch(e) {
+        console.log(e);
+        yield put({
+            type: LOAD_USER_POSTS_FAILURE,
+            error: e,
+        });
+    }
+}
+
+function* loadHashtagPosts(action){
+    try {
+        const result = yield call(loadHashtagPostsAPI, action.data);
+        yield put({
+            type: LOAD_HASHTAG_POSTS_SUCCESS,
+            data: result.data,
+        });
+    } catch(e) {
+        console.log(e);
+        yield put({
+            type: LOAD_HASHTAG_POSTS_FAILURE,
+            error: e,
+        });
+    }
+}
+
 function* watchAddPost(){
     yield takeLatest(ADD_POST_REQUEST, addPost)
 }
@@ -90,10 +136,20 @@ function* watchLoadMainPosts(){
     yield takeLatest(LOAD_MAIN_POSTS_REQUEST, loadMainPosts)
 }
 
+function* watchLoadUserPosts(){
+    yield takeLatest(LOAD_USER_POSTS_REQUEST, loadUserPosts)
+}
+
+function* watchLoadHashtagPosts(){
+    yield takeLatest(LOAD_HASHTAG_POSTS_REQUEST, loadHashtagPosts)
+}
+
 export default function* postSaga(){
     yield all([
         fork(watchAddPost),
         fork(watchAddComment),
         fork(watchLoadMainPosts),
+        fork(watchLoadUserPosts),
+        fork(watchLoadHashtagPosts),
     ]);
 }
