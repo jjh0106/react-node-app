@@ -195,13 +195,27 @@ var PostCard = function PostCard(_ref) {
     })],
     extra: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_3__["Button"], null, "Follow")
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_3__["Card"].Meta, {
-    avatar: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_3__["Avatar"], null, post.User.nickname[0]),
+    avatar: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+      href: {
+        pathname: '/user',
+        query: {
+          id: post.User.id
+        }
+      },
+      as: "/user/".concat(post.User.id)
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_3__["Avatar"], null, post.User.nickname[0]))),
     title: post.User.nickname,
     description: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, post.content.split(/(#[^\s]+)/g).map(function (v) {
       if (v.match(/#[^\s]+/)) {
         return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-          href: "/hashtag",
-          key: v
+          href: {
+            pathname: '/hashtag',
+            query: {
+              tag: v.slice(1)
+            }
+          },
+          key: v,
+          as: "/hashtag/".concat(v.slice(1))
         }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", null, v));
       }
 
@@ -224,7 +238,15 @@ var PostCard = function PostCard(_ref) {
     renderItem: function renderItem(item) {
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_3__["Comment"], {
         author: item.User.nickname,
-        avatar: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_3__["Avatar"], null, item.User.nickname[0]),
+        avatar: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+          href: {
+            pathname: '/user',
+            query: {
+              id: item.User.id
+            }
+          },
+          as: "/user/".concat(item.User.id)
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_3__["Avatar"], null, item.User.nickname[0]))),
         content: item.content
       }));
     }
@@ -1442,6 +1464,8 @@ var reducer = function reducer() {
       }
 
     case LOAD_MAIN_POSTS_REQUEST:
+    case LOAD_HASHTAG_POSTS_REQUEST:
+    case LOAD_USER_POSTS_REQUEST:
       {
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
           mainPosts: []
@@ -1449,6 +1473,8 @@ var reducer = function reducer() {
       }
 
     case LOAD_MAIN_POSTS_SUCCESS:
+    case LOAD_HASHTAG_POSTS_SUCCESS:
+    case LOAD_USER_POSTS_SUCCESS:
       {
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
           mainPosts: action.data
@@ -1456,6 +1482,8 @@ var reducer = function reducer() {
       }
 
     case LOAD_MAIN_POSTS_FAILURE:
+    case LOAD_HASHTAG_POSTS_FAILURE:
+    case LOAD_USER_POSTS_FAILURE:
       {
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state);
       }

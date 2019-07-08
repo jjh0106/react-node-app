@@ -11,7 +11,7 @@ const userAPIRouter = require('./routes/user');
 const postAPIRouter = require('./routes/post');
 const postsAPIRouter = require('./routes/posts');
 // const commentAPIRouter = require('./routes/comment');
-// const hashtagAPIRouter = require('./routes/hashtag');
+const hashtagAPIRouter = require('./routes/hashtag');
 // const imageAPIRouter = require('./routes/image');
 
 dotenv.config();
@@ -46,7 +46,7 @@ app.use('/api/user', userAPIRouter);
 app.use('/api/post', postAPIRouter);
 app.use('/api/posts', postsAPIRouter);
 // app.use('/api/image', imageAPIRouter);
-// app.use('/api/hashtag', hashtagAPIRouter);
+app.use('/api/hashtag', hashtagAPIRouter);
 // app.use('/api/comment', commentAPIRouter);
 
 app.listen(3065, () => {

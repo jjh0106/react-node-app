@@ -29,7 +29,7 @@ const User = ({ id }) => {
                     actions={[
                         <div key="twit">
                             짹짹 <br/>
-                            {userInfo.Post}
+                            {userInfo.Posts}
                         </div>,
                         <div key="following">
                             팔로잉 <br />

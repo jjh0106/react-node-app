@@ -1934,6 +1934,8 @@ var reducer = function reducer() {
       }
 
     case LOAD_MAIN_POSTS_REQUEST:
+    case LOAD_HASHTAG_POSTS_REQUEST:
+    case LOAD_USER_POSTS_REQUEST:
       {
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
           mainPosts: []
@@ -1941,6 +1943,8 @@ var reducer = function reducer() {
       }
 
     case LOAD_MAIN_POSTS_SUCCESS:
+    case LOAD_HASHTAG_POSTS_SUCCESS:
+    case LOAD_USER_POSTS_SUCCESS:
       {
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
           mainPosts: action.data
@@ -1948,6 +1952,8 @@ var reducer = function reducer() {
       }
 
     case LOAD_MAIN_POSTS_FAILURE:
+    case LOAD_HASHTAG_POSTS_FAILURE:
+    case LOAD_USER_POSTS_FAILURE:
       {
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state);
       }
@@ -2150,8 +2156,14 @@ var reducer = function reducer() {
 
     case LOAD_USER_SUCCESS:
       {
+        if (action.me) {
+          return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+            me: action.data
+          });
+        }
+
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
-          me: action.data
+          userInfo: action.data
         });
       }
 
@@ -2670,8 +2682,8 @@ function signupAPI(data) {
   return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/user/', data);
 }
 
-function loadUserAPI(dta) {
-  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/user/', {
+function loadUserAPI(userId) {
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(userId ? "/user/".concat(userId) : '/user/', {
     withCredentials: true
   });
 } //////////////////////////// API 호출::End ////////////////////////////
@@ -2791,7 +2803,7 @@ function signup(action) {
   }, _marked3, null, [[0, 7]]);
 }
 
-function loadUser() {
+function loadUser(action) {
   var _result;
 
   return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function loadUser$(_context4) {
@@ -2800,14 +2812,15 @@ function loadUser() {
         case 0:
           _context4.prev = 0;
           _context4.next = 3;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(loadUserAPI);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(loadUserAPI, action.data);
 
         case 3:
           _result = _context4.sent;
           _context4.next = 6;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
             type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOAD_USER_SUCCESS"],
-            data: _result.data
+            data: _result.data,
+            me: !action.data
           });
 
         case 6:
