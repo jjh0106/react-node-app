@@ -157,10 +157,11 @@ var PostCard = function PostCard(_ref) {
     return dispatch({
       type: _reducers_post__WEBPACK_IMPORTED_MODULE_6__["ADD_COMMENT_REQUEST"],
       data: {
-        postId: post.id
+        postId: post.id,
+        content: commentText
       }
     });
-  }, [me && me.id]);
+  }, [me && me.id, commentText]);
   var onChangeCommentText = Object(react__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function (e) {
     var value = e.target.value;
     setCommentText(value);
@@ -169,6 +170,13 @@ var PostCard = function PostCard(_ref) {
     setCommentFormOpened(function (prev) {
       return !prev;
     });
+
+    if (!commentFormOpened) {
+      dispatch({
+        type: _reducers_post__WEBPACK_IMPORTED_MODULE_6__["LOAD_COMMENTS_REQUEST"],
+        data: post.id
+      });
+    }
   }, []);
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     setCommentText('');
@@ -257,8 +265,8 @@ PostCard.propTypes = {
   post: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.shape({
     User: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object,
     content: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string,
-    img: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string,
-    createdAt: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object
+    img: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string // createdAt: PropTypes.object,
+
   })
 };
 /* harmony default export */ __webpack_exports__["default"] = (PostCard);
@@ -1460,6 +1468,25 @@ var reducer = function reducer() {
           isAddingComment: false,
           addCommentErrorReason: action.error,
           commentAdded: false
+        });
+      }
+
+    case LOAD_COMMENTS_SUCCESS:
+      {
+        var _postIndex = state.mainPosts.findIndex(function (v) {
+          return v.id === action.data.postId;
+        });
+
+        var _post = state.mainPosts[_postIndex];
+        var _Comments = action.data.comment;
+
+        var _mainPosts = Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(state.mainPosts);
+
+        _mainPosts[_postIndex] = Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _post, {
+          Comments: _Comments
+        });
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          mainPosts: _mainPosts
         });
       }
 

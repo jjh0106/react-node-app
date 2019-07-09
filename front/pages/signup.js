@@ -27,7 +27,6 @@ const Signup = () => {
     // 객체는 useEffect에 넣어주지 않는 것이 좋다.
     useEffect(() => {
         if(me){
-            alert('!');
             Router.push('/');
         }
     }, [me && me.id]);

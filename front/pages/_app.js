@@ -30,12 +30,12 @@ JsnBird.propTypes = {
 };
 
 JsnBird.getInitialProps = async (context) => {
-    console.log(context);
-    const { ctx } = context;
+    // console.log(context);
+    const { ctx, Component } = context;
     let pageProps = {};
 
-    if( context.Component.getInitialProps ){
-        pageProps = await context.Component.getInitialProps(ctx);
+    if( Component.getInitialProps ){
+        pageProps = await Component.getInitialProps(ctx);
     }
     return { pageProps };
 };

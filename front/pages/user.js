@@ -33,11 +33,11 @@ const User = ({ id }) => {
                         </div>,
                         <div key="following">
                             팔로잉 <br />
-                            {userInfo.followings}
+                            {userInfo.Followings}
                         </div>,
                         <div key="follower">
                             팔로워 <br/>
-                            {userInfo.followers}
+                            {userInfo.Followers}
                         </div>
                     ]}
                 >
@@ -60,7 +60,7 @@ User.propTypes = {
     id: PropTypes.number.isRequired,
 };
 
-User.getInitialProps = async (context) => {
+User.getInitialProps = async(context) => {
     console.log('User getInitialProps', context.query.id);
     return {
         id: parseInt(context.query.id, 10),

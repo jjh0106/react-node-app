@@ -5,9 +5,9 @@ const db = require('../models');
 const passport = require('passport');
 
 router.get('/', (req, res) => {
-    if(!req.user){
-        return res.status(401).send('로그인이 필요합니다.');
-    }
+    // if(!req.user){
+    //     return res.status(401).send('로그인이 필요합니다.');
+    // }
     const user = Object.assign({}, req.user.toJSON());
     delete user.password;
     return res.json(user);
@@ -63,9 +63,9 @@ router.get('/:id', async(req, res, next) => { // 다른 사람의 정보를 가�
         });
 
         const jsonUser = user.toJSON();
-        jsonUser.Posts = jsonUser.Posts ? jsonUser.Posts.length : 0
-        jsonUser.Followings = jsonUser.Followings ? jsonUser.Followings.length : 0
-        jsonUser.Followers = jsonUser.Followers ? jsonUser.Followers.length : 0
+        jsonUser.Posts = jsonUser.Posts ? jsonUser.Posts.length : 0;
+        jsonUser.Followings = jsonUser.Followings ? jsonUser.Followings.length : 0;
+        jsonUser.Followers = jsonUser.Followers ? jsonUser.Followers.length : 0;
         res.json(jsonUser);
     } catch(e) {
         console.error(e);

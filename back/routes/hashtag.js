@@ -16,7 +16,7 @@ router.get('/:tag', async (req, res, next) => {
         });
         res.json(posts);
     } catch(e) {
-        console.log(e);
+        console.error(e);
         next(e);
     }
 });

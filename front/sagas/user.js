@@ -96,7 +96,7 @@ function* loadUser(action){
             me: !action.data,
         });
     } catch(e) {
-        console.log(e);
+        console.error(e);
         yield put({
             type: LOAD_USER_FAILURE,
             error: e,
@@ -122,7 +122,7 @@ function* watchSignup(){
 }
 
 function* watchLoadUser(){
-    yield takeLatest(LOAD_USER_REQUEST, loadUser)
+    yield takeEvery(LOAD_USER_REQUEST, loadUser)
 }
 //////////////////////////// Watch::End ////////////////////////////
 

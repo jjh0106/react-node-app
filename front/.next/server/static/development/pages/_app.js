@@ -368,15 +368,12 @@ var UserProfile = function UserProfile() {
   var onLogout = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(function () {
     dispatch(_reducers_user__WEBPACK_IMPORTED_MODULE_3__["logoutRequestAction"]);
   }, []);
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_1__["Card"], {
-    actions: [react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      key: "twit"
-    }, "\uD2B8\uC717 ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " ", me.Posts.length), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      key: "followings"
-    }, "\uD314\uB85C\uC789 ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " ", me.Followings.length), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      key: "followers"
-    }, "\uD314\uB85C\uC6CC ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " ", me.Followers.length)]
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_1__["Card"].Meta, {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_1__["Card"] // actions={[
+  //     <div key="twit">트윗 <br/> {me.Posts.length}</div>,
+  //     <div key="following">팔로잉 <br/> {me.Followings.length}</div>,
+  //     <div key="follower">팔로워 <br/> {me.Followers.length}</div>
+  // ]}
+  , null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_1__["Card"].Meta, {
     avatar: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_1__["Avatar"], null, me.nickname[0]),
     title: me.nickname
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
@@ -1415,32 +1412,32 @@ function () {
   var _ref2 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
   /*#__PURE__*/
   _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(context) {
-    var ctx, pageProps;
+    var ctx, Component, pageProps;
     return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            console.log(context);
-            ctx = context.ctx;
+            // console.log(context);
+            ctx = context.ctx, Component = context.Component;
             pageProps = {};
 
-            if (!context.Component.getInitialProps) {
-              _context.next = 7;
+            if (!Component.getInitialProps) {
+              _context.next = 6;
               break;
             }
 
-            _context.next = 6;
-            return context.Component.getInitialProps(ctx);
+            _context.next = 5;
+            return Component.getInitialProps(ctx);
 
-          case 6:
+          case 5:
             pageProps = _context.sent;
 
-          case 7:
+          case 6:
             return _context.abrupt("return", {
               pageProps: pageProps
             });
 
-          case 8:
+          case 7:
           case "end":
             return _context.stop();
         }
@@ -1557,7 +1554,6 @@ var Signup = function Signup() {
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     if (me) {
-      alert('!');
       next_router__WEBPACK_IMPORTED_MODULE_4___default.a.push('/');
     }
   }, [me && me.id]);
@@ -1590,20 +1586,20 @@ var Signup = function Signup() {
     onSubmit: onSubmit,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 61
+      lineNumber: 60
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 62
+      lineNumber: 61
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "user-id",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 63
+      lineNumber: 62
     },
     __self: this
   }, "\uC544\uC774\uB514"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_2__["Input"], {
@@ -1613,20 +1609,20 @@ var Signup = function Signup() {
     onChange: onChageId,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 64
+      lineNumber: 63
     },
     __self: this
   })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 66
+      lineNumber: 65
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "user-nick",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 67
+      lineNumber: 66
     },
     __self: this
   }, "\uB2C9\uB124\uC784"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_2__["Input"], {
@@ -1636,20 +1632,20 @@ var Signup = function Signup() {
     onChange: onChageNick,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 68
+      lineNumber: 67
     },
     __self: this
   })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 70
+      lineNumber: 69
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "user-password",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 71
+      lineNumber: 70
     },
     __self: this
   }, "\uBE44\uBC00\uBC88\uD638"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_2__["Input"], {
@@ -1660,20 +1656,20 @@ var Signup = function Signup() {
     onChange: onChagePassword,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 72
+      lineNumber: 71
     },
     __self: this
   })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 74
+      lineNumber: 73
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "user-password-check",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 75
+      lineNumber: 74
     },
     __self: this
   }, "\uBE44\uBC00\uBC88\uD638 \uCCB4\uD06C"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_2__["Input"], {
@@ -1684,7 +1680,7 @@ var Signup = function Signup() {
     onChange: onChagePasswordCheck,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 76
+      lineNumber: 75
     },
     __self: this
   }), passwordError && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -1693,13 +1689,13 @@ var Signup = function Signup() {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 77
+      lineNumber: 76
     },
     __self: this
   }, "\uBE44\uBC00\uBC88\uD638\uAC00 \uC77C\uCE58\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 79
+      lineNumber: 78
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_2__["Checkbox"], {
@@ -1708,7 +1704,7 @@ var Signup = function Signup() {
     onChange: onChangeTerm,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 80
+      lineNumber: 79
     },
     __self: this
   }, "\uC57D\uAD00 \uB3D9\uC758"), termError && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -1717,13 +1713,13 @@ var Signup = function Signup() {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 81
+      lineNumber: 80
     },
     __self: this
   }, "\uC57D\uAD00\uC5D0 \uB3D9\uC758\uD574 \uC8FC\uC2DC\uAE30 \uBC14\uB78D\uB2C8\uB2E4.")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 83
+      lineNumber: 82
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_2__["Button"], {
@@ -1732,7 +1728,7 @@ var Signup = function Signup() {
     loading: isSigningUp,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 84
+      lineNumber: 83
     },
     __self: this
   }, "\uAC00\uC785")));
@@ -1933,6 +1929,25 @@ var reducer = function reducer() {
         });
       }
 
+    case LOAD_COMMENTS_SUCCESS:
+      {
+        var _postIndex = state.mainPosts.findIndex(function (v) {
+          return v.id === action.data.postId;
+        });
+
+        var _post = state.mainPosts[_postIndex];
+        var _Comments = action.data.comment;
+
+        var _mainPosts = Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(state.mainPosts);
+
+        _mainPosts[_postIndex] = Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _post, {
+          Comments: _Comments
+        });
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          mainPosts: _mainPosts
+        });
+      }
+
     case LOAD_MAIN_POSTS_REQUEST:
     case LOAD_HASHTAG_POSTS_REQUEST:
     case LOAD_USER_POSTS_REQUEST:
@@ -2079,6 +2094,7 @@ var reducer = function reducer() {
     case LOG_IN_REQUEST:
       {
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+          isLoggingIn: true,
           logInErrorReason: ''
         });
       }
@@ -2169,10 +2185,7 @@ var reducer = function reducer() {
 
     case LOAD_USER_FAILURE:
       {
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
-          isSigningUp: false,
-          isSignedUp: false
-        });
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state);
       }
 
     default:
@@ -2260,29 +2273,35 @@ _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(a
 _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(addComment),
     _marked3 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(loadMainPosts),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(loadComments),
     _marked4 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(loadUserPosts),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(loadMainPosts),
     _marked5 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(loadHashtagPosts),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(loadUserPosts),
     _marked6 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchAddPost),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(loadHashtagPosts),
     _marked7 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchAddComment),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchAddPost),
     _marked8 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchLoadMainPosts),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchAddComment),
     _marked9 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchLoadUserPosts),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchLoadComments),
     _marked10 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchLoadHashtagPosts),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchLoadMainPosts),
     _marked11 =
+/*#__PURE__*/
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchLoadUserPosts),
+    _marked12 =
+/*#__PURE__*/
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchLoadHashtagPosts),
+    _marked13 =
 /*#__PURE__*/
 _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(postSaga);
 
@@ -2294,12 +2313,19 @@ function addPostAPI(data) {
   return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/post', data, {
     withCredentials: true
   });
-}
+} // data -> action.data.content & action.data.postId
+
 
 function addCommentAPI(data) {
-  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/post/comment', data, {
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/post/".concat(data.postId, "/comment"), {
+    content: data.content
+  }, {
     withCredentials: true
   });
+}
+
+function loadCommentsAPI(postId) {
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/post/".concat(postId, "/comments"));
 }
 
 function loadMainPostsAPI() {
@@ -2355,6 +2381,8 @@ function addPost(action) {
 }
 
 function addComment(action) {
+  var _result;
+
   return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function addComment$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
@@ -2364,53 +2392,58 @@ function addComment(action) {
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(addCommentAPI, action.data);
 
         case 3:
-          _context2.next = 5;
+          _result = _context2.sent;
+          _context2.next = 6;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
             type: _reducers_post__WEBPACK_IMPORTED_MODULE_3__["ADD_COMMENT_SUCCESS"],
             data: {
-              comment: action.data.comment
+              postId: action.data.postId,
+              comment: _result.data
             }
           });
 
-        case 5:
-          _context2.next = 12;
+        case 6:
+          _context2.next = 13;
           break;
 
-        case 7:
-          _context2.prev = 7;
+        case 8:
+          _context2.prev = 8;
           _context2.t0 = _context2["catch"](0);
           console.log(_context2.t0);
-          _context2.next = 12;
+          _context2.next = 13;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
             type: _reducers_post__WEBPACK_IMPORTED_MODULE_3__["ADD_COMMENT_FAILURE"],
             error: _context2.t0
           });
 
-        case 12:
+        case 13:
         case "end":
           return _context2.stop();
       }
     }
-  }, _marked2, null, [[0, 7]]);
+  }, _marked2, null, [[0, 8]]);
 }
 
-function loadMainPosts() {
-  var _result;
+function loadComments(action) {
+  var _result2;
 
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function loadMainPosts$(_context3) {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function loadComments$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
           _context3.prev = 0;
           _context3.next = 3;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(loadMainPostsAPI);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(loadCommentsAPI, action.data);
 
         case 3:
-          _result = _context3.sent;
+          _result2 = _context3.sent;
           _context3.next = 6;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
-            type: _reducers_post__WEBPACK_IMPORTED_MODULE_3__["LOAD_MAIN_POSTS_SUCCESS"],
-            data: _result.data
+            type: _reducers_post__WEBPACK_IMPORTED_MODULE_3__["LOAD_COMMENTS_SUCCESS"],
+            data: {
+              postId: action.data,
+              comments: _result2.data
+            }
           });
 
         case 6:
@@ -2423,7 +2456,7 @@ function loadMainPosts() {
           console.log(_context3.t0);
           _context3.next = 13;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
-            type: _reducers_post__WEBPACK_IMPORTED_MODULE_3__["LOAD_MAIN_POSTS_FAILURE"],
+            type: _reducers_post__WEBPACK_IMPORTED_MODULE_3__["LOAD_COMMENTS_FAILURE"],
             error: _context3.t0
           });
 
@@ -2435,23 +2468,23 @@ function loadMainPosts() {
   }, _marked3, null, [[0, 8]]);
 }
 
-function loadUserPosts(action) {
-  var _result2;
+function loadMainPosts() {
+  var _result3;
 
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function loadUserPosts$(_context4) {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function loadMainPosts$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
           _context4.prev = 0;
           _context4.next = 3;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(loadUserPostsAPI, action.data);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(loadMainPostsAPI);
 
         case 3:
-          _result2 = _context4.sent;
+          _result3 = _context4.sent;
           _context4.next = 6;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
-            type: _reducers_post__WEBPACK_IMPORTED_MODULE_3__["LOAD_USER_POSTS_SUCCESS"],
-            data: _result2.data
+            type: _reducers_post__WEBPACK_IMPORTED_MODULE_3__["LOAD_MAIN_POSTS_SUCCESS"],
+            data: _result3.data
           });
 
         case 6:
@@ -2464,7 +2497,7 @@ function loadUserPosts(action) {
           console.log(_context4.t0);
           _context4.next = 13;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
-            type: _reducers_post__WEBPACK_IMPORTED_MODULE_3__["LOAD_USER_POSTS_FAILURE"],
+            type: _reducers_post__WEBPACK_IMPORTED_MODULE_3__["LOAD_MAIN_POSTS_FAILURE"],
             error: _context4.t0
           });
 
@@ -2476,23 +2509,23 @@ function loadUserPosts(action) {
   }, _marked4, null, [[0, 8]]);
 }
 
-function loadHashtagPosts(action) {
-  var _result3;
+function loadUserPosts(action) {
+  var _result4;
 
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function loadHashtagPosts$(_context5) {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function loadUserPosts$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
           _context5.prev = 0;
           _context5.next = 3;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(loadHashtagPostsAPI, action.data);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(loadUserPostsAPI, action.data);
 
         case 3:
-          _result3 = _context5.sent;
+          _result4 = _context5.sent;
           _context5.next = 6;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
-            type: _reducers_post__WEBPACK_IMPORTED_MODULE_3__["LOAD_HASHTAG_POSTS_SUCCESS"],
-            data: _result3.data
+            type: _reducers_post__WEBPACK_IMPORTED_MODULE_3__["LOAD_USER_POSTS_SUCCESS"],
+            data: _result4.data
           });
 
         case 6:
@@ -2505,7 +2538,7 @@ function loadHashtagPosts(action) {
           console.log(_context5.t0);
           _context5.next = 13;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
-            type: _reducers_post__WEBPACK_IMPORTED_MODULE_3__["LOAD_HASHTAG_POSTS_FAILURE"],
+            type: _reducers_post__WEBPACK_IMPORTED_MODULE_3__["LOAD_USER_POSTS_FAILURE"],
             error: _context5.t0
           });
 
@@ -2517,29 +2550,54 @@ function loadHashtagPosts(action) {
   }, _marked5, null, [[0, 8]]);
 }
 
-function watchAddPost() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchAddPost$(_context6) {
+function loadHashtagPosts(action) {
+  var _result5;
+
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function loadHashtagPosts$(_context6) {
     while (1) {
       switch (_context6.prev = _context6.next) {
         case 0:
-          _context6.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_3__["ADD_POST_REQUEST"], addPost);
+          _context6.prev = 0;
+          _context6.next = 3;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(loadHashtagPostsAPI, action.data);
 
-        case 2:
+        case 3:
+          _result5 = _context6.sent;
+          _context6.next = 6;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
+            type: _reducers_post__WEBPACK_IMPORTED_MODULE_3__["LOAD_HASHTAG_POSTS_SUCCESS"],
+            data: _result5.data
+          });
+
+        case 6:
+          _context6.next = 13;
+          break;
+
+        case 8:
+          _context6.prev = 8;
+          _context6.t0 = _context6["catch"](0);
+          console.log(_context6.t0);
+          _context6.next = 13;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
+            type: _reducers_post__WEBPACK_IMPORTED_MODULE_3__["LOAD_HASHTAG_POSTS_FAILURE"],
+            error: _context6.t0
+          });
+
+        case 13:
         case "end":
           return _context6.stop();
       }
     }
-  }, _marked6);
+  }, _marked6, null, [[0, 8]]);
 }
 
-function watchAddComment() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchAddComment$(_context7) {
+function watchAddPost() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchAddPost$(_context7) {
     while (1) {
       switch (_context7.prev = _context7.next) {
         case 0:
           _context7.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_3__["ADD_COMMENT_REQUEST"], addComment);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_3__["ADD_POST_REQUEST"], addPost);
 
         case 2:
         case "end":
@@ -2549,13 +2607,13 @@ function watchAddComment() {
   }, _marked7);
 }
 
-function watchLoadMainPosts() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchLoadMainPosts$(_context8) {
+function watchAddComment() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchAddComment$(_context8) {
     while (1) {
       switch (_context8.prev = _context8.next) {
         case 0:
           _context8.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_3__["LOAD_MAIN_POSTS_REQUEST"], loadMainPosts);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_3__["ADD_COMMENT_REQUEST"], addComment);
 
         case 2:
         case "end":
@@ -2565,13 +2623,13 @@ function watchLoadMainPosts() {
   }, _marked8);
 }
 
-function watchLoadUserPosts() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchLoadUserPosts$(_context9) {
+function watchLoadComments() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchLoadComments$(_context9) {
     while (1) {
       switch (_context9.prev = _context9.next) {
         case 0:
           _context9.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_3__["LOAD_USER_POSTS_REQUEST"], loadUserPosts);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_3__["LOAD_COMMENTS_REQUEST"], loadComments);
 
         case 2:
         case "end":
@@ -2581,13 +2639,13 @@ function watchLoadUserPosts() {
   }, _marked9);
 }
 
-function watchLoadHashtagPosts() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchLoadHashtagPosts$(_context10) {
+function watchLoadMainPosts() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchLoadMainPosts$(_context10) {
     while (1) {
       switch (_context10.prev = _context10.next) {
         case 0:
           _context10.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_3__["LOAD_HASHTAG_POSTS_REQUEST"], loadHashtagPosts);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_3__["LOAD_MAIN_POSTS_REQUEST"], loadMainPosts);
 
         case 2:
         case "end":
@@ -2597,13 +2655,13 @@ function watchLoadHashtagPosts() {
   }, _marked10);
 }
 
-function postSaga() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function postSaga$(_context11) {
+function watchLoadUserPosts() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchLoadUserPosts$(_context11) {
     while (1) {
       switch (_context11.prev = _context11.next) {
         case 0:
           _context11.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchAddPost), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchAddComment), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchLoadMainPosts), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchLoadUserPosts), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchLoadHashtagPosts)]);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_3__["LOAD_USER_POSTS_REQUEST"], loadUserPosts);
 
         case 2:
         case "end":
@@ -2611,6 +2669,38 @@ function postSaga() {
       }
     }
   }, _marked11);
+}
+
+function watchLoadHashtagPosts() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchLoadHashtagPosts$(_context12) {
+    while (1) {
+      switch (_context12.prev = _context12.next) {
+        case 0:
+          _context12.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_3__["LOAD_HASHTAG_POSTS_REQUEST"], loadHashtagPosts);
+
+        case 2:
+        case "end":
+          return _context12.stop();
+      }
+    }
+  }, _marked12);
+}
+
+function postSaga() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function postSaga$(_context13) {
+    while (1) {
+      switch (_context13.prev = _context13.next) {
+        case 0:
+          _context13.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchAddPost), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchAddComment), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchLoadComments), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchLoadMainPosts), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchLoadUserPosts), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchLoadHashtagPosts)]);
+
+        case 2:
+        case "end":
+          return _context13.stop();
+      }
+    }
+  }, _marked13);
 }
 
 /***/ }),
@@ -2830,7 +2920,7 @@ function loadUser(action) {
         case 8:
           _context4.prev = 8;
           _context4.t0 = _context4["catch"](0);
-          console.log(_context4.t0);
+          console.error(_context4.t0);
           _context4.next = 13;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
             type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOAD_USER_FAILURE"],
@@ -2901,7 +2991,7 @@ function watchLoadUser() {
       switch (_context8.prev = _context8.next) {
         case 0:
           _context8.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])(_reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOAD_USER_REQUEST"], loadUser);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeEvery"])(_reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOAD_USER_REQUEST"], loadUser);
 
         case 2:
         case "end":

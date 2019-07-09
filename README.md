@@ -1,4 +1,4 @@
-## Spec
+## Stack
 - React
 - Redux
 - Redux-saga

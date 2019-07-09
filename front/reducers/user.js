@@ -67,6 +67,7 @@ const reducer = (state=initialState, action) => {
         case LOG_IN_REQUEST: {
             return {
                 ...state,
+                isLoggingIn: true,
                 logInErrorReason: '',
             };
         }
@@ -148,9 +149,6 @@ const reducer = (state=initialState, action) => {
         case LOAD_USER_FAILURE: {
             return {
                 ...state,
-                isSigningUp: false,
-                isSignedUp: false,
-                
             };
         }
         default: {
