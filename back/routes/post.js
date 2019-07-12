@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../models');
+const { isLoggedIn } = require('./middleware');
 
 // 게시글 작성
-router.post('/', async (req, res, next) => {
+router.post('/', isLoggedIn, async(req, res, next) => {
     try {
         const { content } = req.body;
         const hashtags = content.match(/#[^\s]+/g);
@@ -69,12 +70,8 @@ router.get('/:id/comments', async(req, res, next) => {
     }
 });
 
-router.post('/:id/comment', async(req, res, next) => {
+router.post('/:id/comment', isLoggedIn, async(req, res, next) => {
     try {
-        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", req.user);
-        if( !req.user ){
-            return res.status(401).send('로그인이 필요합니다.');
-        }
         const post = await db.Post.findOne({ where: { id: req.params.id } });
         if( !post ){
             return res.status(404).send('포스트가 존재하지 않습니다.');
