@@ -81,6 +81,22 @@ const reducer = (state=initialState, action) => {
                 postAdded: false,
             }
         }
+        case UPLOAD_IMAGES_REQUEST: {
+            return {
+                ...state,
+            }
+        }
+        case UPLOAD_IMAGES_SUCCESS: {
+            return {
+                ...state,
+                imagePaths: [...state.imagePaths, ...action.data],
+            }
+        }
+        case UPLOAD_IMAGES_FAILURE: {
+            return {
+                ...state,
+            }
+        }
         case ADD_COMMENT_REQUEST: {
             return {
                 ...state,

@@ -311,6 +311,7 @@ var PostForm = function PostForm() {
       isAddingPost = _useSelector.isAddingPost,
       postAdded = _useSelector.postAdded;
 
+  var imageInput = Object(react__WEBPACK_IMPORTED_MODULE_1__["useRef"])();
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     setText('');
   }, [postAdded === true]);
@@ -331,6 +332,19 @@ var PostForm = function PostForm() {
   var onChangeText = Object(react__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function (e) {
     setText(e.target.value);
   }, []);
+  var onClickImageUpload = Object(react__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function () {
+    imageInput.current.click();
+  }, [imageInput.current]);
+  var onChangeImage = Object(react__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function (e) {
+    var imageFormData = new FormData();
+    [].forEach.call(e.target.files, function (f) {
+      imageFormData.append('image', f);
+    });
+    dispatch({
+      type: _reducers_post__WEBPACK_IMPORTED_MODULE_4__["UPLOAD_IMAGES_REQUEST"],
+      data: imageFormData
+    });
+  }, []);
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_2__["Form"], {
     encType: "multipart/form-data",
     onSubmit: onSubmitForm
@@ -342,12 +356,16 @@ var PostForm = function PostForm() {
   }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
     type: "file",
     multiple: true,
-    hidden: true
-  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_2__["Button"], null, "\uC774\uBBF8\uC9C0 \uC5C5\uB85C\uB4DC"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+    hidden: true,
+    ref: imageInput,
+    onChange: onChangeImage
+  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+    onClick: onClickImageUpload
+  }, "\uC774\uBBF8\uC9C0 \uC5C5\uB85C\uB4DC"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_2__["Button"], {
     type: "primary",
     htmlType: "submit",
     loading: isAddingPost
-  }, "\uC9F9\uC9F9")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, imagePaths.map(function (v, i) {
+  }, "\uC9F9\uC9F9")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, imagePaths.map(function (v) {
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       key: v,
       style: {
@@ -1431,6 +1449,23 @@ var reducer = function reducer() {
           addPostErrorReason: action.error,
           postAdded: false
         });
+      }
+
+    case UPLOAD_IMAGES_REQUEST:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state);
+      }
+
+    case UPLOAD_IMAGES_SUCCESS:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          imagePaths: [].concat(Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(state.imagePaths), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(action.data))
+        });
+      }
+
+    case UPLOAD_IMAGES_FAILURE:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state);
       }
 
     case ADD_COMMENT_REQUEST:
