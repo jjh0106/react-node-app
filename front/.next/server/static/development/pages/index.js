@@ -322,13 +322,16 @@ var PostForm = function PostForm() {
       return alert('게시글을 작성해주세요.');
     }
 
+    var formData = new FormData();
+    imagePaths.forEach(function (i) {
+      formData.append('image', i);
+    });
+    formData.append('content', text);
     dispatch({
       type: _reducers_post__WEBPACK_IMPORTED_MODULE_4__["ADD_POST_REQUEST"],
-      data: {
-        content: text
-      }
+      data: formData
     });
-  }, [text]);
+  }, [text, imagePaths]);
   var onChangeText = Object(react__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function (e) {
     setText(e.target.value);
   }, []);
@@ -1459,7 +1462,8 @@ var reducer = function reducer() {
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
           isAddingPost: false,
           mainPosts: [action.data].concat(Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(state.mainPosts)),
-          postAdded: true
+          postAdded: true,
+          imagePaths: []
         });
       }
 

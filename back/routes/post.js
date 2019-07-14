@@ -5,8 +5,24 @@ const router = express.Router();
 const db = require('../models');
 const { isLoggedIn } = require('./middleware');
 
+const upload = multer({
+    storage: multer.diskStorage({
+        destination(req, file, done){
+            done(null, 'uploads');
+        },
+        filename(req, file, done){
+            const ext = path.extname(file.originalname);
+            const basename = path.basename(file.originalname, ext);
+            done(null, basename + new Date().valueOf() + ext);
+        }
+    }),
+    limits: { fileSize: 20 * 1024 * 1024 },
+});
+
 // 게시글 작성
-router.post('/', isLoggedIn, async(req, res, next) => {
+// 폼데이터 파일 -> req.file(s)
+// 폼데이터 일반 값 -> req.body
+router.post('/', isLoggedIn, upload.none(), async(req, res, next) => {
     try {
         const { content } = req.body;
         const hashtags = content.match(/#[^\s]+/g);
@@ -22,6 +38,17 @@ router.post('/', isLoggedIn, async(req, res, next) => {
             })))
             await newPost.addHashtags(result.map(r => r[0]));
         }
+        if( req.body.image ){
+            if( Array.isArray(req.body.image) ){ // 이미지 주소를 여러 개 올리면 [주소1, 주소2, 주소3]
+                const images = await Promise.all(req.body.image.map((image) => { // 동시에 배열의 쿼리 작업 수행 시 사용
+                    return db.Image.create({ src: image });
+                }))
+                await newPost.addImages(images);
+            } else { // 하나만 올리면 주소1
+                const image = await db.Image.create({ src: req.body.image });
+                await newPost.addImage(image);
+            }
+        }
 
         // Post 테이블의 UserId에 매칭되는 User 정보를 JOIN 해줘야 하는데 두 가지 방법이 있다.
         // 1.
@@ -35,6 +62,8 @@ router.post('/', isLoggedIn, async(req, res, next) => {
             include: [{
                 model: db.User,
                 attributes: ['id', 'nickname'],
+            }, {
+                model: db.Image,
             }]
         });
         return res.json(fullPost);
@@ -43,21 +72,6 @@ router.post('/', isLoggedIn, async(req, res, next) => {
         return next(e);
     }
 });
-
-const upload = multer({
-    storage: multer.diskStorage({
-        destination(req, file, done){
-            done(null, 'uploads');
-        },
-        filename(req, file, done){
-            const ext = path.extname(file.originalname);
-            const basename = path.basename(file.originalname, ext);
-            done(null, basename + new Date().valueOf() + ext);
-        }
-    }),
-    limits: { fileSize: 20 * 1024 * 1024 },
-
-})
 
 router.post('/images', upload.array('image'), (req, res) => {
     res.json(req.files.map(v => v.filename));
