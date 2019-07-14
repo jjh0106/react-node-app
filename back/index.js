@@ -20,6 +20,7 @@ db.sequelize.sync();
 passportConfig();
 
 app.use(morgan('dev'));
+app.use('/', express.static('uploads')); // 다른 서버에서 자유롭게 가져갈 수 있게 해주는 미들웨어
 app.use(express.json()); // json형식의 body를 처리
 app.use(express.urlencoded({ extended: true })); // form으로 넘어온 데이터 처리
 app.use(cors({

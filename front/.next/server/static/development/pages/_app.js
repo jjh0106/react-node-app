@@ -1908,6 +1908,15 @@ var reducer = function reducer() {
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state);
       }
 
+    case REMOVE_IMAGE:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          imagePaths: state.imagePaths.filter(function (v, i) {
+            return i !== action.index;
+          })
+        });
+      }
+
     case ADD_COMMENT_REQUEST:
       {
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {

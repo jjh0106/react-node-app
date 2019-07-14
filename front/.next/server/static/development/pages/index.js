@@ -345,6 +345,14 @@ var PostForm = function PostForm() {
       data: imageFormData
     });
   }, []);
+  var onRemoveImage = Object(react__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function (index) {
+    return function () {
+      dispatch({
+        type: _reducers_post__WEBPACK_IMPORTED_MODULE_4__["REMOVE_IMAGE"],
+        index: index
+      });
+    };
+  }, []);
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_2__["Form"], {
     encType: "multipart/form-data",
     onSubmit: onSubmitForm
@@ -365,21 +373,34 @@ var PostForm = function PostForm() {
     type: "primary",
     htmlType: "submit",
     loading: isAddingPost
-  }, "\uC9F9\uC9F9")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, imagePaths.map(function (v) {
+  }, "\uC9F9\uC9F9")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, imagePaths.map(function (v, i) {
+    // <Thumbnail path={v} />
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       key: v,
       style: {
         display: 'inline-block'
       }
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
-      src: "http://localhost:3000/".concat(v),
+      src: "http://localhost:3065/".concat(v),
       style: {
         width: '200px'
       },
       alt: v
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_2__["Button"], null, "\uC81C\uAC70")));
+    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+      onClick: onRemoveImage(i)
+    }, "\uC81C\uAC70")));
   })));
-};
+}; // const Thumbnail = ({ path }) => {
+//     return (
+//         <div key={path} style={{ display: 'inline-block' }}>
+//             <img src={`http://localhost:3000/${path}`} style={{ width: '200px' }} alt={path} />
+//             <div>
+//                 <Button>제거</Button>
+//             </div>
+//         </div>
+//     );
+// };
+
 
 /* harmony default export */ __webpack_exports__["default"] = (PostForm);
 
@@ -1466,6 +1487,15 @@ var reducer = function reducer() {
     case UPLOAD_IMAGES_FAILURE:
       {
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state);
+      }
+
+    case REMOVE_IMAGE:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          imagePaths: state.imagePaths.filter(function (v, i) {
+            return i !== action.index;
+          })
+        });
       }
 
     case ADD_COMMENT_REQUEST:
