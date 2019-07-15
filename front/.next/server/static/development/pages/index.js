@@ -183,9 +183,9 @@ var PostCard = function PostCard(_ref) {
   }, [commentAdded === true]);
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_3__["Card"], {
     key: +post.createdAt,
-    cover: post.img && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+    cover: post.Images.length > 0 && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
       alt: "example",
-      src: post.img
+      src: "http://localhost:3065/".concat(post.Images[0].src)
     }),
     actions: [react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_3__["Icon"], {
       type: "retweet",
