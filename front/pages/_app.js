@@ -15,6 +15,8 @@ const JsnBird = ({ Component, store, pageProps }) => {
             <Head>
                 <title>JsnBird</title>
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/3.19.0/antd.css" />
+                <link rel="stylesheet" type="text/css" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
+                <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
             </Head>
             <AppLayout> {/* props로 하위 jsx를 전달 */}
                 <Component {...pageProps} />
