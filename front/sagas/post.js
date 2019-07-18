@@ -22,39 +22,17 @@ import {
     UPLOAD_IMAGES_REQUEST,
     UPLOAD_IMAGES_SUCCESS,
     UPLOAD_IMAGES_FAILURE,
+    LIKE_POST_REQUEST,
+    LIKE_POST_SUCCESS,
+    LIKE_POST_FAILURE,
+    UNLIKE_POST_REQUEST,
+    UNLIKE_POST_FAILURE,
+    UNLIKE_POST_SUCCESS,
  } from '../reducers/post';
 
+//////////////////////////////////////////// add post ////////////////////////////////////////////
 function addPostAPI(data){
     return axios.post('/post', data, {
-        withCredentials: true,
-    });
-}
-
-// data -> action.data.content & action.data.postId
-function addCommentAPI(data){
-    return axios.post(`/post/${data.postId}/comment`, { content: data.content }, {
-        withCredentials: true,
-    });
-}
-
-function loadCommentsAPI(postId){
-    return axios.get(`/post/${postId}/comments`);
-}
-
-function loadMainPostsAPI(){
-    return axios.get('/posts');
-}
-
-function loadUserPostsAPI(id){
-    return axios.get(`/user/${id}/posts`);
-}
-
-function loadHashtagPostsAPI(tag){
-    return axios.get(`/hashtag/${tag}`);
-}
-
-function uploadImagesAPI(formData){
-    return axios.post('/post/images', formData, {
         withCredentials: true,
     });
 }
@@ -73,6 +51,18 @@ function* addPost(action){
             error: e,
         });
     }
+}
+
+function* watchAddPost(){
+    yield takeLatest(ADD_POST_REQUEST, addPost)
+}
+
+//////////////////////////////////////////// add comment ////////////////////////////////////////////
+// data -> action.data.content & action.data.postId
+function addCommentAPI(data){
+    return axios.post(`/post/${data.postId}/comment`, { content: data.content }, {
+        withCredentials: true,
+    });
 }
 
 function* addComment(action){ 
@@ -94,6 +84,16 @@ function* addComment(action){
     }
 }
 
+function* watchAddComment(){
+    yield takeLatest(ADD_COMMENT_REQUEST, addComment)
+}
+
+
+//////////////////////////////////////////// load comment ////////////////////////////////////////////
+function loadCommentsAPI(postId){
+    return axios.get(`/post/${postId}/comments`);
+}
+
 function* loadComments(action){
     try {
         const result = yield call(loadCommentsAPI, action.data);
@@ -113,6 +113,15 @@ function* loadComments(action){
     }
 }
 
+function* watchLoadComments(){
+    yield takeLatest(LOAD_COMMENTS_REQUEST, loadComments)
+}
+
+//////////////////////////////////////////// load main posts ////////////////////////////////////////////
+function loadMainPostsAPI(){
+    return axios.get('/posts');
+}
+
 function* loadMainPosts(){
     try {
         const result = yield call(loadMainPostsAPI);
@@ -127,6 +136,15 @@ function* loadMainPosts(){
             error: e,
         });
     }
+}
+
+function* watchLoadMainPosts(){
+    yield takeLatest(LOAD_MAIN_POSTS_REQUEST, loadMainPosts)
+}
+
+//////////////////////////////////////////// load user posts ////////////////////////////////////////////
+function loadUserPostsAPI(id){
+    return axios.get(`/user/${id}/posts`);
 }
 
 function* loadUserPosts(action){
@@ -145,6 +163,15 @@ function* loadUserPosts(action){
     }
 }
 
+function* watchLoadUserPosts(){
+    yield takeLatest(LOAD_USER_POSTS_REQUEST, loadUserPosts)
+}
+
+//////////////////////////////////////////// load hashtag posts ////////////////////////////////////////////
+function loadHashtagPostsAPI(tag){
+    return axios.get(`/hashtag/${tag}`);
+}
+
 function* loadHashtagPosts(action){
     try {
         const result = yield call(loadHashtagPostsAPI, action.data);
@@ -159,6 +186,17 @@ function* loadHashtagPosts(action){
             error: e,
         });
     }
+}
+
+function* watchLoadHashtagPosts(){
+    yield takeLatest(LOAD_HASHTAG_POSTS_REQUEST, loadHashtagPosts)
+}
+
+//////////////////////////////////////////// upload images ////////////////////////////////////////////
+function uploadImagesAPI(formData){
+    return axios.post('/post/images', formData, {
+        withCredentials: true,
+    });
 }
 
 function* uploadImages(action){
@@ -177,32 +215,68 @@ function* uploadImages(action){
     }
 }
 
-function* watchAddPost(){
-    yield takeLatest(ADD_POST_REQUEST, addPost)
-}
-
-function* watchAddComment(){
-    yield takeLatest(ADD_COMMENT_REQUEST, addComment)
-}
-
-function* watchLoadComments(){
-    yield takeLatest(LOAD_COMMENTS_REQUEST, loadComments)
-}
-
-function* watchLoadMainPosts(){
-    yield takeLatest(LOAD_MAIN_POSTS_REQUEST, loadMainPosts)
-}
-
-function* watchLoadUserPosts(){
-    yield takeLatest(LOAD_USER_POSTS_REQUEST, loadUserPosts)
-}
-
-function* watchLoadHashtagPosts(){
-    yield takeLatest(LOAD_HASHTAG_POSTS_REQUEST, loadHashtagPosts)
-}
-
 function* watchUploadImages(){
     yield takeLatest(UPLOAD_IMAGES_REQUEST, uploadImages)
+}
+
+//////////////////////////////////////////// like post ////////////////////////////////////////////
+function likePostAPI(postId){
+    return axios.post(`/post/${postId}/like`, {}, {
+        withCredentials: true,
+    });
+}
+
+function* likePost(action){
+    try {
+        const result = yield call(likePostAPI, action.data);
+        yield put({
+            type: LIKE_POST_SUCCESS,
+            data: {
+                postId: action.data,
+                userId: result.data.userId,
+            },
+        });
+    } catch(e) {
+        console.log(e);
+        yield put({
+            type: LIKE_POST_FAILURE,
+            error: e,
+        });
+    }
+}
+
+function* watchLikePost(){
+    yield takeLatest(LIKE_POST_REQUEST, likePost)
+}
+
+//////////////////////////////////////////// unlike post ////////////////////////////////////////////
+function unlikePostAPI(postId){
+    return axios.delete(`/post/${postId}/like`, {
+        withCredentials: true,
+    });
+}
+
+function* unlikePost(action){
+    try {
+        const result = yield call(unlikePostAPI, action.data);
+        yield put({
+            type: UNLIKE_POST_SUCCESS,
+            data: {
+                postId: action.data,
+                userId: result.data.userId,
+            },
+        });
+    } catch(e) {
+        console.log(e);
+        yield put({
+            type: UNLIKE_POST_FAILURE,
+            error: e,
+        });
+    }
+}
+
+function* watchUnlikePost(){
+    yield takeLatest(UNLIKE_POST_REQUEST, unlikePost)
 }
 
 export default function* postSaga(){
@@ -214,5 +288,7 @@ export default function* postSaga(){
         fork(watchLoadUserPosts),
         fork(watchLoadHashtagPosts),
         fork(watchUploadImages),
+        fork(watchLikePost),
+        fork(watchUnlikePost),
     ]);
 }

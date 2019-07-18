@@ -144,7 +144,6 @@ const reducer = (state=initialState, action) => {
                 mainPosts,
             };
         }
-
         case LOAD_MAIN_POSTS_REQUEST: 
         case LOAD_HASHTAG_POSTS_REQUEST: 
         case LOAD_USER_POSTS_REQUEST: {
@@ -164,6 +163,48 @@ const reducer = (state=initialState, action) => {
         case LOAD_MAIN_POSTS_FAILURE: 
         case LOAD_HASHTAG_POSTS_FAILURE: 
         case LOAD_USER_POSTS_FAILURE: {
+            return {
+                ...state,
+            }
+        }
+        case LIKE_POST_REQUEST: {
+            return {
+                ...state,
+            }
+        }
+        case LIKE_POST_SUCCESS: {
+            const postIndex = state.mainPosts.findIndex(v => v.id === action.data.postId); 
+            const post = state.mainPosts[postIndex];
+            const Likers = [{id: action.data.userId}, ...post.Likers];
+            const mainPosts = [...state.mainPosts];
+            mainPosts[postIndex] = { ...post, Likers };
+            return {
+                ...state,
+                mainPosts,
+            }
+        }
+        case LIKE_POST_FAILURE: {
+            return {
+                ...state,
+            }
+        }
+        case UNLIKE_POST_REQUEST: {
+            return {
+                ...state,
+            }
+        }
+        case UNLIKE_POST_SUCCESS: {
+            const postIndex = state.mainPosts.findIndex(v => v.id === action.data.postId); 
+            const post = state.mainPosts[postIndex];
+            const Likers = post.Likers.filter(v => v.id != action.data.userId);
+            const mainPosts = [...state.mainPosts];
+            mainPosts[postIndex] = { ...post, Likers };
+            return {
+                ...state,
+                mainPosts,
+            }
+        }
+        case UNLIKE_POST_FAILURE: {
             return {
                 ...state,
             }

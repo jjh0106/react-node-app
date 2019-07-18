@@ -83,6 +83,11 @@ router.get('/:id/posts', async(req, res, next) => {
                 attributes: ['id', 'nickname'],
             }, {
                 model: db.Image,
+            }, {
+                model: db.User,
+                through: 'Liker',
+                as: 'Likers',
+                attributes: ['id'],
             }]
         });
         res.json(posts);

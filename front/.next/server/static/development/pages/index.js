@@ -273,6 +273,9 @@ var PostCard = function PostCard(_ref) {
       isAddingComment = _useSelector2.isAddingComment;
 
   var dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_5__["useDispatch"])();
+  var liked = me && post.Likers && post.Likers.find(function (v) {
+    return v.id === me.id;
+  });
   var onSubmitComment = Object(react__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function (e) {
     e.preventDefault();
 
@@ -304,6 +307,25 @@ var PostCard = function PostCard(_ref) {
       });
     }
   }, []);
+  var onToggleLike = Object(react__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function () {
+    if (!me) {
+      return alert('로그인이 필요합니다.');
+    }
+
+    if (liked) {
+      // 좋아요 누른 상태
+      dispatch({
+        type: _reducers_post__WEBPACK_IMPORTED_MODULE_6__["UNLIKE_POST_REQUEST"],
+        data: post.id
+      });
+    } else {
+      // 좋아요 안 누른 상태
+      dispatch({
+        type: _reducers_post__WEBPACK_IMPORTED_MODULE_6__["LIKE_POST_REQUEST"],
+        data: post.id
+      });
+    }
+  }, [me && me.id, post && post.id, liked]);
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     setCommentText('');
   }, [commentAdded === true]);
@@ -317,7 +339,10 @@ var PostCard = function PostCard(_ref) {
       key: "retweet"
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_3__["Icon"], {
       type: "heart",
-      key: "heart"
+      key: "heart",
+      theme: liked ? "twoTone" : "outlined",
+      twoToneColor: "#eb2f96",
+      onClick: onToggleLike
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_3__["Icon"], {
       type: "message",
       key: "message",
@@ -1796,6 +1821,69 @@ var reducer = function reducer() {
     case LOAD_MAIN_POSTS_FAILURE:
     case LOAD_HASHTAG_POSTS_FAILURE:
     case LOAD_USER_POSTS_FAILURE:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state);
+      }
+
+    case LIKE_POST_REQUEST:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state);
+      }
+
+    case LIKE_POST_SUCCESS:
+      {
+        var _postIndex2 = state.mainPosts.findIndex(function (v) {
+          return v.id === action.data.postId;
+        });
+
+        var _post2 = state.mainPosts[_postIndex2];
+        var Likers = [{
+          id: action.data.userId
+        }].concat(Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_post2.Likers));
+
+        var _mainPosts2 = Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(state.mainPosts);
+
+        _mainPosts2[_postIndex2] = Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _post2, {
+          Likers: Likers
+        });
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          mainPosts: _mainPosts2
+        });
+      }
+
+    case LIKE_POST_FAILURE:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state);
+      }
+
+    case UNLIKE_POST_REQUEST:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state);
+      }
+
+    case UNLIKE_POST_SUCCESS:
+      {
+        var _postIndex3 = state.mainPosts.findIndex(function (v) {
+          return v.id === action.data.postId;
+        });
+
+        var _post3 = state.mainPosts[_postIndex3];
+
+        var _Likers = _post3.Likers.filter(function (v) {
+          return v.id != action.data.userId;
+        });
+
+        var _mainPosts3 = Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(state.mainPosts);
+
+        _mainPosts3[_postIndex3] = Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _post3, {
+          Likers: _Likers
+        });
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          mainPosts: _mainPosts3
+        });
+      }
+
+    case UNLIKE_POST_FAILURE:
       {
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state);
       }
