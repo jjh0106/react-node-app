@@ -107,7 +107,7 @@ router.post('/:id/comment', isLoggedIn, async(req, res, next) => {
         if( !post ){
             return res.status(404).send('포스트가 존재하지 않습니다.');
         }
-        const newComment = db.Comment.create({
+        const newComment = await db.Comment.create({
             PostId: post.id,
             UserId: req.user.id,
             content: req.body.content,

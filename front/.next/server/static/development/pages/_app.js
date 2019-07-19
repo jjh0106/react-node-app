@@ -1938,20 +1938,27 @@ var reducer = function reducer() {
 
     case ADD_COMMENT_SUCCESS:
       {
-        var postIndex = state.mainPosts.findIndex(function (v) {
-          return v.id === action.data.postId;
-        });
-        var post = state.mainPosts[postIndex];
-        var Comments = [].concat(Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(post.Comments), [action.data.comment]); // 기존댓글 + 새 댓글
+        var mainPosts = state.mainPosts;
+        var _action$data = action.data,
+            postId = _action$data.postId,
+            comment = _action$data.comment;
+        var updatedPosts = mainPosts.map(function (post) {
+          if (post.id === postId) {
+            return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, post, {
+              Comments: [].concat(Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(post.Comments), [comment])
+            });
+            return post;
+          }
+        }); // const postIndex = state.mainPosts.findIndex(v => v.id === action.data.postId);
+        // const post = state.mainPosts[postIndex];
+        // const Comments = [...post.Comments, action.data.comment]; // 기존댓글 + 새 댓글
+        // const mainPosts = [...state.mainPosts]; 
+        // mainPosts[postIndex] = { ...post, Comments };
 
-        var mainPosts = Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(state.mainPosts);
-
-        mainPosts[postIndex] = Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, post, {
-          Comments: Comments
-        });
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
           isAddingComment: false,
-          mainPosts: mainPosts,
+          mainPosts: updatedPosts,
+          // mainPosts,
           commentAdded: true
         });
       }
@@ -1967,17 +1974,16 @@ var reducer = function reducer() {
 
     case LOAD_COMMENTS_SUCCESS:
       {
-        var _postIndex = state.mainPosts.findIndex(function (v) {
+        var postIndex = state.mainPosts.findIndex(function (v) {
           return v.id === action.data.postId;
         });
-
-        var _post = state.mainPosts[_postIndex];
-        var _Comments = action.data.comment;
+        var post = state.mainPosts[postIndex];
+        var Comments = action.data.comments;
 
         var _mainPosts = Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(state.mainPosts);
 
-        _mainPosts[_postIndex] = Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _post, {
-          Comments: _Comments
+        _mainPosts[postIndex] = Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, post, {
+          Comments: Comments
         });
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
           mainPosts: _mainPosts
@@ -2016,18 +2022,18 @@ var reducer = function reducer() {
 
     case LIKE_POST_SUCCESS:
       {
-        var _postIndex2 = state.mainPosts.findIndex(function (v) {
+        var _postIndex = state.mainPosts.findIndex(function (v) {
           return v.id === action.data.postId;
         });
 
-        var _post2 = state.mainPosts[_postIndex2];
+        var _post = state.mainPosts[_postIndex];
         var Likers = [{
           id: action.data.userId
-        }].concat(Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_post2.Likers));
+        }].concat(Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_post.Likers));
 
         var _mainPosts2 = Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(state.mainPosts);
 
-        _mainPosts2[_postIndex2] = Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _post2, {
+        _mainPosts2[_postIndex] = Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _post, {
           Likers: Likers
         });
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
@@ -2047,19 +2053,19 @@ var reducer = function reducer() {
 
     case UNLIKE_POST_SUCCESS:
       {
-        var _postIndex3 = state.mainPosts.findIndex(function (v) {
+        var _postIndex2 = state.mainPosts.findIndex(function (v) {
           return v.id === action.data.postId;
         });
 
-        var _post3 = state.mainPosts[_postIndex3];
+        var _post2 = state.mainPosts[_postIndex2];
 
-        var _Likers = _post3.Likers.filter(function (v) {
+        var _Likers = _post2.Likers.filter(function (v) {
           return v.id != action.data.userId;
         });
 
         var _mainPosts3 = Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(state.mainPosts);
 
-        _mainPosts3[_postIndex3] = Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _post3, {
+        _mainPosts3[_postIndex2] = Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, _post2, {
           Likers: _Likers
         });
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
@@ -2068,6 +2074,23 @@ var reducer = function reducer() {
       }
 
     case UNLIKE_POST_FAILURE:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state);
+      }
+
+    case RETWEET_REQUEST:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state);
+      }
+
+    case RETWEET_SUCCESS:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          mainPosts: [action.data].concat(Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(state.mainPosts))
+        });
+      }
+
+    case RETWEET_FAILURE:
       {
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state);
       }
@@ -2419,6 +2442,12 @@ _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(u
 /*#__PURE__*/
 _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchUnlikePost),
     _marked19 =
+/*#__PURE__*/
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(retweet),
+    _marked20 =
+/*#__PURE__*/
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchRetweet),
+    _marked21 =
 /*#__PURE__*/
 _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(postSaga);
 
@@ -3005,22 +3034,86 @@ function watchUnlikePost() {
       }
     }
   }, _marked18);
+} //////////////////////////////////////////// retweet ////////////////////////////////////////////
+
+
+function retweetAPI(postId) {
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/post/".concat(postId, "/retweet"), {}, {
+    withCredentials: true
+  });
 }
 
-function postSaga() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function postSaga$(_context19) {
+function retweet(action) {
+  var _result9;
+
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function retweet$(_context19) {
     while (1) {
       switch (_context19.prev = _context19.next) {
         case 0:
-          _context19.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchAddPost), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchAddComment), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchLoadComments), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchLoadMainPosts), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchLoadUserPosts), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchLoadHashtagPosts), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchUploadImages), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchLikePost), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchUnlikePost)]);
+          _context19.prev = 0;
+          _context19.next = 3;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(retweetAPI, action.data);
 
-        case 2:
+        case 3:
+          _result9 = _context19.sent;
+          _context19.next = 6;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
+            type: _reducers_post__WEBPACK_IMPORTED_MODULE_3__["RETWEET_SUCCESS"],
+            data: _result9.data
+          });
+
+        case 6:
+          _context19.next = 13;
+          break;
+
+        case 8:
+          _context19.prev = 8;
+          _context19.t0 = _context19["catch"](0);
+          console.log(_context19.t0);
+          _context19.next = 13;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
+            type: _reducers_post__WEBPACK_IMPORTED_MODULE_3__["RETWEET_FAILURE"],
+            error: _context19.t0
+          });
+
+        case 13:
         case "end":
           return _context19.stop();
       }
     }
-  }, _marked19);
+  }, _marked19, null, [[0, 8]]);
+}
+
+function watchRetweet() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchRetweet$(_context20) {
+    while (1) {
+      switch (_context20.prev = _context20.next) {
+        case 0:
+          _context20.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_3__["RETWEET_REQUEST"], retweet);
+
+        case 2:
+        case "end":
+          return _context20.stop();
+      }
+    }
+  }, _marked20);
+}
+
+function postSaga() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function postSaga$(_context21) {
+    while (1) {
+      switch (_context21.prev = _context21.next) {
+        case 0:
+          _context21.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchAddPost), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchAddComment), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchLoadComments), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchLoadMainPosts), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchLoadUserPosts), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchLoadHashtagPosts), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchUploadImages), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchLikePost), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchUnlikePost), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchRetweet)]);
+
+        case 2:
+        case "end":
+          return _context21.stop();
+      }
+    }
+  }, _marked21);
 }
 
 /***/ }),

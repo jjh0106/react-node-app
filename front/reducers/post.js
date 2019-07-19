@@ -113,15 +113,27 @@ const reducer = (state=initialState, action) => {
             }
         }
         case ADD_COMMENT_SUCCESS: {
-            const postIndex = state.mainPosts.findIndex(v => v.id === action.data.postId);
-            const post = state.mainPosts[postIndex];
-            const Comments = [...post.Comments, action.data.comment]; // 기존댓글 + 새 댓글
-            const mainPosts = [...state.mainPosts]; 
-            mainPosts[postIndex] = { ...post, Comments };
+            const { mainPosts } = state;
+            const { postId, comment } = action.data;
+            const updatedPosts = mainPosts.map(post => {
+                if( post.id === postId ){
+                    return {
+                        ...post,
+                        Comments: [...post.Comments, comment ],
+                    }
+                    return post;
+                }
+            })
+            // const postIndex = state.mainPosts.findIndex(v => v.id === action.data.postId);
+            // const post = state.mainPosts[postIndex];
+            // const Comments = [...post.Comments, action.data.comment]; // 기존댓글 + 새 댓글
+            // const mainPosts = [...state.mainPosts]; 
+            // mainPosts[postIndex] = { ...post, Comments };
             return {
                 ...state,
                 isAddingComment: false,
-                mainPosts,
+                mainPosts: updatedPosts,
+                // mainPosts,
                 commentAdded: true,
             }
         }
@@ -136,7 +148,7 @@ const reducer = (state=initialState, action) => {
         case LOAD_COMMENTS_SUCCESS: {
             const postIndex = state.mainPosts.findIndex(v => v.id === action.data.postId);
             const post = state.mainPosts[postIndex];
-            const Comments = action.data.comment; 
+            const Comments = action.data.comments; 
             const mainPosts = [...state.mainPosts]; 
             mainPosts[postIndex] = { ...post, Comments };
             return {
