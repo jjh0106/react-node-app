@@ -284,7 +284,7 @@ function* watchUnlikePost(){
 
 //////////////////////////////////////////// retweet ////////////////////////////////////////////
 function retweetAPI(postId){
-    return axios.delete(`/post/${postId}/retweet`, {
+    return axios.post(`/post/${postId}/retweet`, {}, {
         withCredentials: true,
     });
 }
@@ -305,7 +305,7 @@ function* retweet(action){
     }
 }
 
-function* watchUnlikePost(){
+function* watchRetweet(){
     yield takeLatest(RETWEET_REQUEST, retweet)
 }
 
