@@ -16,10 +16,19 @@ router.get('/', async (req, res, next) => {
                 through: 'Liker',
                 as: 'Likers',
                 attributes: ['id'],
+            }, {
+                model: db.Post,
+                as: 'Retweet',
+                include: [{
+                    model: db.User,
+                    attributes: ['id', 'nickname'],
+                }, {
+                    model: db.Image,
+                }]
             }],
             order: [['createdAt', 'DESC']]
         })
-        return res.json(posts);
+        res.json(posts);
     } catch(e) {
         console.error(e);
         next(e);
