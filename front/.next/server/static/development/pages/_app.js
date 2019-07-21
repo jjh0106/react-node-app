@@ -2144,7 +2144,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signupRequestAction", function() { return signupRequestAction; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loginRequestAction", function() { return loginRequestAction; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logoutRequestAction", function() { return logoutRequestAction; });
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/toConsumableArray */ "./node_modules/@babel/runtime-corejs2/helpers/esm/toConsumableArray.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+
 
 var initialState = {
   isLoggingOut: false,
@@ -2215,7 +2217,7 @@ var reducer = function reducer() {
   switch (action.type) {
     case LOG_IN_REQUEST:
       {
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
           isLoggingIn: true,
           logInErrorReason: ''
         });
@@ -2223,7 +2225,7 @@ var reducer = function reducer() {
 
     case LOG_IN_SUCCESS:
       {
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
           isLoggingIn: false,
           me: action.data
         });
@@ -2231,7 +2233,7 @@ var reducer = function reducer() {
 
     case LOG_IN_FAILURE:
       {
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
           isLoggingIn: false,
           me: null,
           logInErrorReason: action.error
@@ -2240,14 +2242,14 @@ var reducer = function reducer() {
 
     case LOG_OUT_REQUEST:
       {
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
           isLoggingOut: true
         });
       }
 
     case LOG_OUT_SUCCESS:
       {
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
           isLoggingOut: false,
           me: null
         });
@@ -2255,7 +2257,7 @@ var reducer = function reducer() {
 
     case LOG_OUT_FAILURE:
       {
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
           isLoggingOut: false,
           me: null
         });
@@ -2263,7 +2265,7 @@ var reducer = function reducer() {
 
     case SIGN_UP_REQUEST:
       {
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
           isSigningUp: true,
           isSignedUp: false,
           signUpErrorReason: ''
@@ -2272,7 +2274,7 @@ var reducer = function reducer() {
 
     case SIGN_UP_SUCCESS:
       {
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
           isSigningUp: false,
           isSignedUp: true
         });
@@ -2280,7 +2282,7 @@ var reducer = function reducer() {
 
     case SIGN_UP_FAILURE:
       {
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
           isSigningUp: false,
           isSignedUp: false,
           signUpErrorReason: action.error
@@ -2289,30 +2291,72 @@ var reducer = function reducer() {
 
     case LOAD_USER_REQUEST:
       {
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state);
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state);
       }
 
     case LOAD_USER_SUCCESS:
       {
         if (action.me) {
-          return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+          return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
             me: action.data
           });
         }
 
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
           userInfo: action.data
         });
       }
 
     case LOAD_USER_FAILURE:
       {
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state);
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state);
+      }
+
+    case FOLLOW_USER_REQUEST:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state);
+      }
+
+    case FOLLOW_USER_SUCCESS:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          me: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state.me, {
+            Followings: [{
+              id: action.data
+            }].concat(Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(state.me.Followings))
+          })
+        });
+      }
+
+    case FOLLOW_USER_FAILURE:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state);
+      }
+
+    case UNFOLLOW_USER_REQUEST:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state);
+      }
+
+    case UNFOLLOW_USER_SUCCESS:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          me: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state.me, {
+            Followings: Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(state.me.Followings).filter(function (v) {
+              return v.id !== action.data;
+            })
+          })
+        });
+      }
+
+    case UNFOLLOW_USER_FAILURE:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state);
       }
 
     default:
       {
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state);
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state);
       }
   }
 };
@@ -3142,56 +3186,50 @@ var _marked =
 _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(login),
     _marked2 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(logout),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchLogin),
     _marked3 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(signup),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(logout),
     _marked4 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(loadUser),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchLogout),
     _marked5 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchLogin),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(signup),
     _marked6 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchLogout),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchSignup),
     _marked7 =
 /*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchSignup),
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(loadUser),
     _marked8 =
 /*#__PURE__*/
 _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchLoadUser),
     _marked9 =
 /*#__PURE__*/
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(follow),
+    _marked10 =
+/*#__PURE__*/
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchFollow),
+    _marked11 =
+/*#__PURE__*/
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(unfollow),
+    _marked12 =
+/*#__PURE__*/
+_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(watchUnfollow),
+    _marked13 =
+/*#__PURE__*/
 _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(userSaga);
 
 
 
- //////////////////////////// API 호출::Begin ////////////////////////////
+ //////////////////////////////////////////// login ////////////////////////////////////////////
 
 function loginAPI(data) {
   return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/user/login/', data, {
     withCredentials: true
   });
 }
-
-function logoutAPI() {
-  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/user/logout/', {}, {
-    withCredentials: true
-  });
-}
-
-function signupAPI(data) {
-  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/user/', data);
-}
-
-function loadUserAPI(userId) {
-  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(userId ? "/user/".concat(userId) : '/user/', {
-    withCredentials: true
-  });
-} //////////////////////////// API 호출::End ////////////////////////////
-//////////////////////////// Dispatch::Begin ////////////////////////////
-
 
 function login(action) {
   var result;
@@ -3233,55 +3271,42 @@ function login(action) {
   }, _marked, null, [[0, 8]]);
 }
 
-function logout() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function logout$(_context2) {
+function watchLogin() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchLogin$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          _context2.prev = 0;
-          _context2.next = 3;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(logoutAPI);
+          _context2.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])(_reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOG_IN_REQUEST"], login);
 
-        case 3:
-          _context2.next = 5;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
-            type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOG_OUT_SUCCESS"]
-          });
-
-        case 5:
-          _context2.next = 12;
-          break;
-
-        case 7:
-          _context2.prev = 7;
-          _context2.t0 = _context2["catch"](0);
-          console.log(_context2.t0);
-          _context2.next = 12;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
-            type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOG_OUT_FAILURE"]
-          });
-
-        case 12:
+        case 2:
         case "end":
           return _context2.stop();
       }
     }
-  }, _marked2, null, [[0, 7]]);
+  }, _marked2);
+} //////////////////////////////////////////// logout ////////////////////////////////////////////
+
+
+function logoutAPI() {
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/user/logout/', {}, {
+    withCredentials: true
+  });
 }
 
-function signup(action) {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function signup$(_context3) {
+function logout() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function logout$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
           _context3.prev = 0;
           _context3.next = 3;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(signupAPI, action.data);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(logoutAPI);
 
         case 3:
           _context3.next = 5;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
-            type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["SIGN_UP_SUCCESS"]
+            type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOG_OUT_SUCCESS"]
           });
 
         case 5:
@@ -3294,8 +3319,7 @@ function signup(action) {
           console.log(_context3.t0);
           _context3.next = 12;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
-            type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["SIGN_UP_FAILURE"],
-            error: _context3.t0
+            type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOG_OUT_FAILURE"]
           });
 
         case 12:
@@ -3306,73 +3330,71 @@ function signup(action) {
   }, _marked3, null, [[0, 7]]);
 }
 
-function loadUser(action) {
-  var _result;
-
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function loadUser$(_context4) {
+function watchLogout() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchLogout$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
-          _context4.prev = 0;
-          _context4.next = 3;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(loadUserAPI, action.data);
+          _context4.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])(_reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOG_OUT_REQUEST"], logout);
 
-        case 3:
-          _result = _context4.sent;
-          _context4.next = 6;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
-            type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOAD_USER_SUCCESS"],
-            data: _result.data,
-            me: !action.data
-          });
-
-        case 6:
-          _context4.next = 13;
-          break;
-
-        case 8:
-          _context4.prev = 8;
-          _context4.t0 = _context4["catch"](0);
-          console.error(_context4.t0);
-          _context4.next = 13;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
-            type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOAD_USER_FAILURE"],
-            error: _context4.t0
-          });
-
-        case 13:
+        case 2:
         case "end":
           return _context4.stop();
       }
     }
-  }, _marked4, null, [[0, 8]]);
-} //////////////////////////// Dispatch::End //////////////////////////// 
-//////////////////////////// Watch::Begin ////////////////////////////
+  }, _marked4);
+} //////////////////////////////////////////// signup ////////////////////////////////////////////
 
 
-function watchLogin() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchLogin$(_context5) {
+function signupAPI(data) {
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/user/', data);
+}
+
+function signup(action) {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function signup$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
-          _context5.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])(_reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOG_IN_REQUEST"], login);
+          _context5.prev = 0;
+          _context5.next = 3;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(signupAPI, action.data);
 
-        case 2:
+        case 3:
+          _context5.next = 5;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
+            type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["SIGN_UP_SUCCESS"]
+          });
+
+        case 5:
+          _context5.next = 12;
+          break;
+
+        case 7:
+          _context5.prev = 7;
+          _context5.t0 = _context5["catch"](0);
+          console.log(_context5.t0);
+          _context5.next = 12;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
+            type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["SIGN_UP_FAILURE"],
+            error: _context5.t0
+          });
+
+        case 12:
         case "end":
           return _context5.stop();
       }
     }
-  }, _marked5);
+  }, _marked5, null, [[0, 7]]);
 }
 
-function watchLogout() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchLogout$(_context6) {
+function watchSignup() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchSignup$(_context6) {
     while (1) {
       switch (_context6.prev = _context6.next) {
         case 0:
           _context6.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])(_reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOG_OUT_REQUEST"], logout);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])(_reducers_user__WEBPACK_IMPORTED_MODULE_3__["SIGN_UP_REQUEST"], signup);
 
         case 2:
         case "end":
@@ -3380,22 +3402,55 @@ function watchLogout() {
       }
     }
   }, _marked6);
+} //////////////////////////////////////////// load user ////////////////////////////////////////////
+
+
+function loadUserAPI(userId) {
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(userId ? "/user/".concat(userId) : '/user/', {
+    withCredentials: true
+  });
 }
 
-function watchSignup() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchSignup$(_context7) {
+function loadUser(action) {
+  var _result;
+
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function loadUser$(_context7) {
     while (1) {
       switch (_context7.prev = _context7.next) {
         case 0:
-          _context7.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])(_reducers_user__WEBPACK_IMPORTED_MODULE_3__["SIGN_UP_REQUEST"], signup);
+          _context7.prev = 0;
+          _context7.next = 3;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(loadUserAPI, action.data);
 
-        case 2:
+        case 3:
+          _result = _context7.sent;
+          _context7.next = 6;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
+            type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOAD_USER_SUCCESS"],
+            data: _result.data,
+            me: !action.data
+          });
+
+        case 6:
+          _context7.next = 13;
+          break;
+
+        case 8:
+          _context7.prev = 8;
+          _context7.t0 = _context7["catch"](0);
+          console.error(_context7.t0);
+          _context7.next = 13;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
+            type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOAD_USER_FAILURE"],
+            error: _context7.t0
+          });
+
+        case 13:
         case "end":
           return _context7.stop();
       }
     }
-  }, _marked7);
+  }, _marked7, null, [[0, 8]]);
 }
 
 function watchLoadUser() {
@@ -3412,24 +3467,150 @@ function watchLoadUser() {
       }
     }
   }, _marked8);
-} //////////////////////////// Watch::End ////////////////////////////
-//////////////////////////// Entry ////////////////////////////
+} //////////////////////////////////////////// follow ////////////////////////////////////////////
 
 
-function userSaga() {
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function userSaga$(_context9) {
+function followAPI(userId) {
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/user/".concat(userId, "/follow"), {}, {
+    withCredentials: true
+  });
+}
+
+function follow(action) {
+  var _result2;
+
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function follow$(_context9) {
     while (1) {
       switch (_context9.prev = _context9.next) {
         case 0:
-          _context9.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchLogin), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchLogout), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchSignup), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchLoadUser)]);
+          _context9.prev = 0;
+          _context9.next = 3;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(followAPI, action.data);
 
-        case 2:
+        case 3:
+          _result2 = _context9.sent;
+          _context9.next = 6;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
+            type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["FOLLOW_USER_SUCCESS"],
+            data: _result2.data
+          });
+
+        case 6:
+          _context9.next = 13;
+          break;
+
+        case 8:
+          _context9.prev = 8;
+          _context9.t0 = _context9["catch"](0);
+          console.log(_context9.t0);
+          _context9.next = 13;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
+            type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["FOLLOW_USER_FAILURE"],
+            error: _context9.t0
+          });
+
+        case 13:
         case "end":
           return _context9.stop();
       }
     }
-  }, _marked9);
+  }, _marked9, null, [[0, 8]]);
+}
+
+function watchFollow() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchFollow$(_context10) {
+    while (1) {
+      switch (_context10.prev = _context10.next) {
+        case 0:
+          _context10.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])(_reducers_user__WEBPACK_IMPORTED_MODULE_3__["FOLLOW_USER_REQUEST"], follow);
+
+        case 2:
+        case "end":
+          return _context10.stop();
+      }
+    }
+  }, _marked10);
+} //////////////////////////////////////////// follow ////////////////////////////////////////////
+
+
+function unfollowAPI(userId) {
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.delete("/user/".concat(userId, "/follow"), {
+    withCredentials: true
+  });
+}
+
+function unfollow(action) {
+  var _result3;
+
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function unfollow$(_context11) {
+    while (1) {
+      switch (_context11.prev = _context11.next) {
+        case 0:
+          _context11.prev = 0;
+          _context11.next = 3;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(unfollowAPI, action.data);
+
+        case 3:
+          _result3 = _context11.sent;
+          _context11.next = 6;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
+            type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["UNFOLLOW_USER_SUCCESS"],
+            data: _result3.data
+          });
+
+        case 6:
+          _context11.next = 13;
+          break;
+
+        case 8:
+          _context11.prev = 8;
+          _context11.t0 = _context11["catch"](0);
+          console.log(_context11.t0);
+          _context11.next = 13;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])({
+            type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["UNFOLLOW_USER_FAILURE"],
+            error: _context11.t0
+          });
+
+        case 13:
+        case "end":
+          return _context11.stop();
+      }
+    }
+  }, _marked11, null, [[0, 8]]);
+}
+
+function watchUnfollow() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function watchUnfollow$(_context12) {
+    while (1) {
+      switch (_context12.prev = _context12.next) {
+        case 0:
+          _context12.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])(_reducers_user__WEBPACK_IMPORTED_MODULE_3__["UNFOLLOW_USER_REQUEST"], unfollow);
+
+        case 2:
+        case "end":
+          return _context12.stop();
+      }
+    }
+  }, _marked12);
+}
+
+function userSaga() {
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function userSaga$(_context13) {
+    while (1) {
+      switch (_context13.prev = _context13.next) {
+        case 0:
+          _context13.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchLogin), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchLogout), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchSignup), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchLoadUser), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchFollow), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["fork"])(watchUnfollow)]);
+
+        case 2:
+        case "end":
+          return _context13.stop();
+      }
+    }
+  }, _marked13);
 } // take: 해당 액션이 디스패치되면 제너레이터를 next하는 이펙트(해당 액션을 기다리다가 yield를 풀어준다.)
 // 서버에 동시에 두 요청 이상이 발생했을 때, 모두 허용할 것인가(takeEvery) 아니면 마지막 것만 허용할 것인가 차이(takeLatest)  
 // call은 동기호출, fork는 비동기호출 -- API를 요청 후 응답을 받고 다음 행동을  취하기 위해서는 call로 응답을 대기한다.

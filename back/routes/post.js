@@ -173,7 +173,7 @@ router.post('/:id/retweet', isLoggedIn, async(req, res, next) => {
             return res.status(403).send('자신의 글은 리트윗할 수 없습니다.');
         }
         const retweetTargetId = post.RetweetId || post.id;
-        const exPost = db.Post.findOne({
+        const exPost = await db.Post.findOne({
             where: {
                 UserId: req.user.id,
                 RetweetId: retweetTargetId,

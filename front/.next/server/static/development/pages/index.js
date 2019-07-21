@@ -238,7 +238,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _reducers_post__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../reducers/post */ "./reducers/post.js");
-/* harmony import */ var _PostImages__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./PostImages */ "./components/PostImages.js");
+/* harmony import */ var _reducers_user__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../reducers/user */ "./reducers/user.js");
+/* harmony import */ var _PostImages__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./PostImages */ "./components/PostImages.js");
+/* harmony import */ var _PostCardContent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./PostCardContent */ "./components/PostCardContent.js");
+
+
 
 
 
@@ -336,12 +340,28 @@ var PostCard = function PostCard(_ref) {
       data: post.id
     });
   }, [me && me.id, post.id]);
+  var onFollow = Object(react__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function (userId) {
+    return function () {
+      dispatch({
+        type: _reducers_user__WEBPACK_IMPORTED_MODULE_7__["FOLLOW_USER_REQUEST"],
+        data: userId
+      });
+    };
+  }, []);
+  var onUnfollow = Object(react__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function (userId) {
+    return function () {
+      dispatch({
+        type: _reducers_user__WEBPACK_IMPORTED_MODULE_7__["UNFOLLOW_USER_REQUEST"],
+        data: userId
+      });
+    };
+  }, []);
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     setCommentText('');
   }, [commentAdded === true]);
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_3__["Card"], {
     key: +post.createdAt,
-    cover: post.Images[0] && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_PostImages__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    cover: post.Images && post.Images[0] && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_PostImages__WEBPACK_IMPORTED_MODULE_8__["default"], {
       images: post.Images
     }),
     actions: [react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_3__["Icon"], {
@@ -358,12 +378,41 @@ var PostCard = function PostCard(_ref) {
       type: "message",
       key: "message",
       onClick: onToggleComment
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_3__["Icon"], {
-      type: "ellipsis",
-      key: "ellipsis"
-    })],
-    extra: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_3__["Button"], null, "Follow")
+    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_3__["Popover"], {
+      key: "ellipsis",
+      content: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_3__["Button"].Group, null, me && post.UserId === me.id ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_3__["Button"], null, "\uC218\uC815"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+        type: "danger"
+      }, "\uC0AD\uC81C")) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_3__["Button"], null, "\uC2E0\uACE0"))
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_3__["Icon"], {
+      type: "ellipsis"
+    }))],
+    title: post.RetweetId ? "".concat(post.User.nickname, "\uB2D8\uC774 \uB9AC\uD2B8\uC717 \uD558\uC168\uC2B5\uB2C8\uB2E4.") : null,
+    extra: !me || post.User.id === me.id ? null : me.Followings && me.Followings.find(function (v) {
+      return v.id === post.User.id;
+    }) ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+      onClick: onUnfollow(post.User.id)
+    }, "\uC5B8\uD314\uB85C\uC6B0") : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+      onClick: onFollow(post.User.id)
+    }, "\uD314\uB85C\uC6B0")
+  }, post.RetweetId && post.Retweet ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_3__["Card"], {
+    cover: post.Retweet.Images[0] && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_PostImages__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      images: post.Retweet.Images
+    })
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_3__["Card"].Meta, {
+    avatar: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+      href: {
+        pathname: '/user',
+        query: {
+          id: post.Retweet.User.id
+        }
+      },
+      as: "/user/".concat(post.Retweet.User.id)
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_3__["Avatar"], null, post.Retweet.User.nickname[0]))),
+    title: post.Retweet.User.nickname,
+    description: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_PostCardContent__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      postData: post.Retweet.content
+    })
+  })) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_3__["Card"].Meta, {
     avatar: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
       href: {
         pathname: '/user',
@@ -374,22 +423,9 @@ var PostCard = function PostCard(_ref) {
       as: "/user/".concat(post.User.id)
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_3__["Avatar"], null, post.User.nickname[0]))),
     title: post.User.nickname,
-    description: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, post.content.split(/(#[^\s]+)/g).map(function (v) {
-      if (v.match(/#[^\s]+/)) {
-        return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-          href: {
-            pathname: '/hashtag',
-            query: {
-              tag: v.slice(1)
-            }
-          },
-          key: v,
-          as: "/hashtag/".concat(v.slice(1))
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", null, v));
-      }
-
-      return v;
-    }))
+    description: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_PostCardContent__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      postData: post.content
+    })
   })), commentFormOpened && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_3__["Form"], {
     onSubmit: onSubmitComment
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_3__["Form"].Item, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_3__["Input"].TextArea, {
@@ -428,9 +464,52 @@ PostCard.propTypes = {
     content: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string,
     img: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string // createdAt: PropTypes.object,
 
-  })
+  }).isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (PostCard);
+
+/***/ }),
+
+/***/ "./components/PostCardContent.js":
+/*!***************************************!*\
+  !*** ./components/PostCardContent.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "prop-types");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+var PostCardContent = function PostCardContent(_ref) {
+  var postData = _ref.postData;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, postData.split(/(#[^\s]+)/g).map(function (v) {
+    if (v.match(/#[^\s]+/)) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Link, {
+        href: {
+          pathname: '/hashtag',
+          query: {
+            tag: v.slice(1)
+          }
+        },
+        key: v,
+        as: "/hashtag/".concat(v.slice(1))
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null, v));
+    }
+
+    return v;
+  }));
+};
+
+PostCardContent.propTypes = {
+  postData: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired
+};
+/* harmony default export */ __webpack_exports__["default"] = (PostCardContent);
 
 /***/ }),
 
@@ -1918,6 +1997,265 @@ var reducer = function reducer() {
       }
 
     case RETWEET_FAILURE:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state);
+      }
+
+    default:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state);
+      }
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (reducer);
+
+/***/ }),
+
+/***/ "./reducers/user.js":
+/*!**************************!*\
+  !*** ./reducers/user.js ***!
+  \**************************/
+/*! exports provided: initialState, SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAILURE, LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAILURE, LOG_OUT_REQUEST, LOG_OUT_SUCCESS, LOG_OUT_FAILURE, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAILURE, LOAD_FOLLOW_REQUEST, LOAD_FOLLOW_SUCCESS, LOAD_FOLLOW_FAILURE, FOLLOW_USER_REQUEST, FOLLOW_USER_SUCCESS, FOLLOW_USER_FAILURE, UNFOLLOW_USER_REQUEST, UNFOLLOW_USER_SUCCESS, UNFOLLOW_USER_FAILURE, REMOVE_FOLLOWER_REQUEST, REMOVE_FOLLOWER_SUCCESS, REMOVE_FOLLOWER_FAILURE, ADD_POST_TO_ME, signupRequestAction, loginRequestAction, logoutRequestAction, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initialState", function() { return initialState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SIGN_UP_REQUEST", function() { return SIGN_UP_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SIGN_UP_SUCCESS", function() { return SIGN_UP_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SIGN_UP_FAILURE", function() { return SIGN_UP_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_IN_REQUEST", function() { return LOG_IN_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_IN_SUCCESS", function() { return LOG_IN_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_IN_FAILURE", function() { return LOG_IN_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_OUT_REQUEST", function() { return LOG_OUT_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_OUT_SUCCESS", function() { return LOG_OUT_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_OUT_FAILURE", function() { return LOG_OUT_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_USER_REQUEST", function() { return LOAD_USER_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_USER_SUCCESS", function() { return LOAD_USER_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_USER_FAILURE", function() { return LOAD_USER_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_FOLLOW_REQUEST", function() { return LOAD_FOLLOW_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_FOLLOW_SUCCESS", function() { return LOAD_FOLLOW_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_FOLLOW_FAILURE", function() { return LOAD_FOLLOW_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FOLLOW_USER_REQUEST", function() { return FOLLOW_USER_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FOLLOW_USER_SUCCESS", function() { return FOLLOW_USER_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FOLLOW_USER_FAILURE", function() { return FOLLOW_USER_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UNFOLLOW_USER_REQUEST", function() { return UNFOLLOW_USER_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UNFOLLOW_USER_SUCCESS", function() { return UNFOLLOW_USER_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UNFOLLOW_USER_FAILURE", function() { return UNFOLLOW_USER_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_FOLLOWER_REQUEST", function() { return REMOVE_FOLLOWER_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_FOLLOWER_SUCCESS", function() { return REMOVE_FOLLOWER_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_FOLLOWER_FAILURE", function() { return REMOVE_FOLLOWER_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_POST_TO_ME", function() { return ADD_POST_TO_ME; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signupRequestAction", function() { return signupRequestAction; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loginRequestAction", function() { return loginRequestAction; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logoutRequestAction", function() { return logoutRequestAction; });
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/toConsumableArray */ "./node_modules/@babel/runtime-corejs2/helpers/esm/toConsumableArray.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+
+
+var initialState = {
+  isLoggingOut: false,
+  // 로그아웃 시도중
+  isLoggingIn: false,
+  // 로그인 시도중
+  logInErrorReason: '',
+  // 로그인 실패 이유
+  isSignedUp: false,
+  // 회원가입 성공
+  isSigningUp: false,
+  // 회원가입 시도중
+  signUpErrorReason: '',
+  // 회원가입 실패 이유
+  me: null,
+  followingList: [],
+  followerList: [],
+  userInfo: null
+};
+var SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
+var SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
+var SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
+var LOG_IN_REQUEST = 'LOG_IN_REQUEST';
+var LOG_IN_SUCCESS = 'LOG_IN_SUCCESS';
+var LOG_IN_FAILURE = 'LOG_IN_FAILURE';
+var LOG_OUT_REQUEST = 'LOG_OUT_REQUEST';
+var LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';
+var LOG_OUT_FAILURE = 'LOG_OUT_FAILURE';
+var LOAD_USER_REQUEST = 'LOAD_USER_REQUEST';
+var LOAD_USER_SUCCESS = 'LOAD_USER_SUCCESS';
+var LOAD_USER_FAILURE = 'LOAD_USER_FAILURE';
+var LOAD_FOLLOW_REQUEST = 'LOAD_FOLLOW_REQUEST';
+var LOAD_FOLLOW_SUCCESS = 'LOAD_FOLLOW_SUCCESS';
+var LOAD_FOLLOW_FAILURE = 'LOAD_FOLLOW_FAILURE'; // 팔로우
+
+var FOLLOW_USER_REQUEST = 'FOLLOW_USER_REQUEST';
+var FOLLOW_USER_SUCCESS = 'FOLLOW_USER_SUCCESS';
+var FOLLOW_USER_FAILURE = 'FOLLOW_USER_FAILURE'; // 언팔로우
+
+var UNFOLLOW_USER_REQUEST = 'UNFOLLOW_USER_REQUEST';
+var UNFOLLOW_USER_SUCCESS = 'UNFOLLOW_USER_SUCCESS';
+var UNFOLLOW_USER_FAILURE = 'UNFOLLOW_USER_FAILURE'; // 팔로워 삭제
+
+var REMOVE_FOLLOWER_REQUEST = 'REMOVE_FOLLOWER_REQUEST';
+var REMOVE_FOLLOWER_SUCCESS = 'REMOVE_FOLLOWER_SUCCESS';
+var REMOVE_FOLLOWER_FAILURE = 'REMOVE_FOLLOWER_FAILURE';
+var ADD_POST_TO_ME = 'ADD_POST_TO_ME';
+var signupRequestAction = function signupRequestAction(data) {
+  return {
+    type: SIGN_UP_REQUEST,
+    data: data
+  };
+};
+var loginRequestAction = function loginRequestAction(data) {
+  return {
+    type: LOG_IN_REQUEST,
+    data: data
+  };
+};
+var logoutRequestAction = {
+  type: LOG_OUT_REQUEST
+};
+
+var reducer = function reducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case LOG_IN_REQUEST:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          isLoggingIn: true,
+          logInErrorReason: ''
+        });
+      }
+
+    case LOG_IN_SUCCESS:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          isLoggingIn: false,
+          me: action.data
+        });
+      }
+
+    case LOG_IN_FAILURE:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          isLoggingIn: false,
+          me: null,
+          logInErrorReason: action.error
+        });
+      }
+
+    case LOG_OUT_REQUEST:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          isLoggingOut: true
+        });
+      }
+
+    case LOG_OUT_SUCCESS:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          isLoggingOut: false,
+          me: null
+        });
+      }
+
+    case LOG_OUT_FAILURE:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          isLoggingOut: false,
+          me: null
+        });
+      }
+
+    case SIGN_UP_REQUEST:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          isSigningUp: true,
+          isSignedUp: false,
+          signUpErrorReason: ''
+        });
+      }
+
+    case SIGN_UP_SUCCESS:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          isSigningUp: false,
+          isSignedUp: true
+        });
+      }
+
+    case SIGN_UP_FAILURE:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          isSigningUp: false,
+          isSignedUp: false,
+          signUpErrorReason: action.error
+        });
+      }
+
+    case LOAD_USER_REQUEST:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state);
+      }
+
+    case LOAD_USER_SUCCESS:
+      {
+        if (action.me) {
+          return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+            me: action.data
+          });
+        }
+
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          userInfo: action.data
+        });
+      }
+
+    case LOAD_USER_FAILURE:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state);
+      }
+
+    case FOLLOW_USER_REQUEST:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state);
+      }
+
+    case FOLLOW_USER_SUCCESS:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          me: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state.me, {
+            Followings: [{
+              id: action.data
+            }].concat(Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(state.me.Followings))
+          })
+        });
+      }
+
+    case FOLLOW_USER_FAILURE:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state);
+      }
+
+    case UNFOLLOW_USER_REQUEST:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state);
+      }
+
+    case UNFOLLOW_USER_SUCCESS:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          me: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state.me, {
+            Followings: Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(state.me.Followings).filter(function (v) {
+              return v.id !== action.data;
+            })
+          })
+        });
+      }
+
+    case UNFOLLOW_USER_FAILURE:
       {
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state);
       }

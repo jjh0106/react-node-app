@@ -1,11 +1,12 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import Link from 'next/link';
-import { Card, Icon, Button, Avatar, List, Form, Input, Comment } from 'antd';
+import { Card, Icon, Button, Avatar, List, Form, Input, Comment, Popover } from 'antd';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { ADD_COMMENT_REQUEST, LOAD_COMMENTS_REQUEST, UNLIKE_POST_REQUEST, LIKE_POST_REQUEST, RETWEET_REQUEST } from '../reducers/post';
+import { FOLLOW_USER_REQUEST, UNFOLLOW_USER_REQUEST } from '../reducers/user';
 import PostImages from './PostImages';
-import PostCardContent from './PostCardContent.js';
+import PostCardContent from './PostCardContent';
 
 const PostCard = ({ post }) => {
     const [commentFormOpened, setCommentFormOpened] = useState(false);
@@ -73,6 +74,20 @@ const PostCard = ({ post }) => {
         })
     }, [me && me.id, post.id]);
 
+    const onFollow = useCallback(userId => () => {
+        dispatch({
+            type: FOLLOW_USER_REQUEST,
+            data: userId,
+        })
+    }, []);
+
+    const onUnfollow = useCallback(userId => () => {
+        dispatch({
+            type: UNFOLLOW_USER_REQUEST,
+            data: userId,
+        })
+    }, []);
+
     useEffect(() => {
         setCommentText('');
     }, [commentAdded === true])
@@ -80,33 +95,38 @@ const PostCard = ({ post }) => {
     return (
         <div>
             <Card
-            key={+post.createdAt}
-            cover={post.Images[0] && <PostImages images={post.Images} />}
-            actions={[
-                <Icon type="retweet" key="retweet" onClick={onRetweet} />,
-                <Icon type="heart" key="heart" theme={ liked ? "twoTone" : "outlined" } twoToneColor="#eb2f96" onClick={onToggleLike} />,
-                <Icon type="message" key="message" onClick={onToggleComment} />,
-                <Popover
-                    key="ellipsis"
-                    content={(
-                        <Button.Group>
-                            {me && post.UserId === me.id
-                                ? (
-                                    <>
-                                        <Button>수정</Button>
-                                        <Button type="danger">삭제</Button>
-                                    </>
-                                )
-                                : <Button>신고</Button>
-                            }
-                        </Button.Group>
-                    )}
-                >
-                    <Icon type="ellipsis" />
-                </Popover>,
-            ]}
-            title={post.RetweetId ? `${post.User.nickname}님이 리트윗 하셨습니다.` : null}
-            extra={<Button>Follow</Button>}
+                key={+post.createdAt}
+                cover={post.Images && post.Images[0] && <PostImages images={post.Images} />}
+                actions={[
+                    <Icon type="retweet" key="retweet" onClick={onRetweet} />,
+                    <Icon type="heart" key="heart" theme={ liked ? "twoTone" : "outlined" } twoToneColor="#eb2f96" onClick={onToggleLike} />,
+                    <Icon type="message" key="message" onClick={onToggleComment} />,
+                    <Popover
+                        key="ellipsis"
+                        content={(
+                            <Button.Group>
+                                {me && post.UserId === me.id
+                                    ? (
+                                        <>
+                                            <Button>수정</Button>
+                                            <Button type="danger">삭제</Button>
+                                        </>
+                                    )
+                                    : <Button>신고</Button>
+                                }
+                            </Button.Group>
+                        )}
+                    >
+                        <Icon type="ellipsis" />
+                    </Popover>,
+                ]}
+                title={post.RetweetId ? `${post.User.nickname}님이 리트윗 하셨습니다.` : null}
+                extra={ !me || post.User.id === me.id
+                    ? null
+                    : me.Followings && me.Followings.find(v => v.id === post.User.id)
+                        ? <Button onClick={onUnfollow(post.User.id)}>언팔로우</Button>
+                        : <Button onClick={onFollow(post.User.id)}>팔로우</Button>
+                }
             >
                 { post.RetweetId && post.Retweet 
                 ?   <Card
@@ -177,7 +197,7 @@ PostCard.propTypes = {
         content: PropTypes.string,
         img: PropTypes.string,
         // createdAt: PropTypes.object,
-    }),
+    }).isRequired,
 };
 
 export default PostCard;

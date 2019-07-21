@@ -13,36 +13,21 @@ import {
     LOAD_USER_SUCCESS,
     LOAD_USER_FAILURE,
     LOAD_USER_REQUEST,
+    FOLLOW_USER_SUCCESS,
+    FOLLOW_USER_FAILURE,
+    FOLLOW_USER_REQUEST,
+    UNFOLLOW_USER_SUCCESS,
+    UNFOLLOW_USER_FAILURE,
+    UNFOLLOW_USER_REQUEST,
  } from '../reducers/user';
 
-//////////////////////////// API 호출::Begin ////////////////////////////
+ //////////////////////////////////////////// login ////////////////////////////////////////////
 function loginAPI(data){
     return axios.post('/user/login/', data, {
         withCredentials: true,
     });
 }
 
-function logoutAPI(){
-    return axios.post('/user/logout/', {}, {
-        withCredentials: true,
-    });
-}
-
-function signupAPI(data){
-    return axios.post('/user/', data);
-}
-
-function loadUserAPI(userId){
-    return axios.get( userId ? `/user/${userId}` : '/user/', {
-        withCredentials: true,
-    });
-}
-//////////////////////////// API 호출::End ////////////////////////////
-
-
-
-
-//////////////////////////// Dispatch::Begin ////////////////////////////
 function* login(action){
     try {
         const result = yield call(loginAPI, action.data);
@@ -56,6 +41,17 @@ function* login(action){
             type: LOG_IN_FAILURE,
         });
     }
+}
+
+function* watchLogin(){
+    yield takeLatest(LOG_IN_REQUEST, login)
+}
+
+//////////////////////////////////////////// logout ////////////////////////////////////////////
+function logoutAPI(){
+    return axios.post('/user/logout/', {}, {
+        withCredentials: true,
+    });
 }
 
 function* logout(){
@@ -72,6 +68,15 @@ function* logout(){
     }
 }
 
+function* watchLogout(){
+    yield takeLatest(LOG_OUT_REQUEST, logout)
+}
+
+//////////////////////////////////////////// signup ////////////////////////////////////////////
+function signupAPI(data){
+    return axios.post('/user/', data);
+}
+
 function* signup(action){ 
     try {
         yield call(signupAPI, action.data); // action.data에는 컴포넌트에서 디스패치한 userId, password, nickname가 들어있다.
@@ -85,6 +90,17 @@ function* signup(action){
             error: e,
         });
     }
+}
+
+function* watchSignup(){
+    yield takeLatest(SIGN_UP_REQUEST, signup)
+}
+
+//////////////////////////////////////////// load user ////////////////////////////////////////////
+function loadUserAPI(userId){
+    return axios.get( userId ? `/user/${userId}` : '/user/', {
+        withCredentials: true,
+    });
 }
 
 function* loadUser(action){ 
@@ -103,39 +119,73 @@ function* loadUser(action){
         });
     }
 }
-//////////////////////////// Dispatch::End //////////////////////////// 
-
-
-
-
-//////////////////////////// Watch::Begin ////////////////////////////
-function* watchLogin(){
-    yield takeLatest(LOG_IN_REQUEST, login)
-}
-
-function* watchLogout(){
-    yield takeLatest(LOG_OUT_REQUEST, logout)
-}
-
-function* watchSignup(){
-    yield takeLatest(SIGN_UP_REQUEST, signup)
-}
 
 function* watchLoadUser(){
     yield takeEvery(LOAD_USER_REQUEST, loadUser)
 }
-//////////////////////////// Watch::End ////////////////////////////
 
+//////////////////////////////////////////// follow ////////////////////////////////////////////
+function followAPI(userId){
+    return axios.post(`/user/${userId}/follow`, {}, {
+        withCredentials: true,
+    });
+}
 
+function* follow(action){
+    try {
+        const result = yield call(followAPI, action.data);
+        yield put({
+            type: FOLLOW_USER_SUCCESS,
+            data: result.data,
+        });
+    } catch(e) {
+        console.log(e);
+        yield put({
+            type: FOLLOW_USER_FAILURE,
+            error: e,
+        });
+    }
+}
 
+function* watchFollow(){
+    yield takeLatest(FOLLOW_USER_REQUEST, follow)
+}
 
-//////////////////////////// Entry ////////////////////////////
+//////////////////////////////////////////// follow ////////////////////////////////////////////
+function unfollowAPI(userId){
+    return axios.delete(`/user/${userId}/follow`, {
+        withCredentials: true,
+    });
+}
+
+function* unfollow(action){
+    try {
+        const result = yield call(unfollowAPI, action.data);
+        yield put({
+            type: UNFOLLOW_USER_SUCCESS,
+            data: result.data,
+        });
+    } catch(e) {
+        console.log(e);
+        yield put({
+            type: UNFOLLOW_USER_FAILURE,
+            error: e,
+        });
+    }
+}
+
+function* watchUnfollow(){
+    yield takeLatest(UNFOLLOW_USER_REQUEST, unfollow)
+}
+
 export default function* userSaga(){
     yield all([
         fork(watchLogin),
         fork(watchLogout),
         fork(watchSignup),
         fork(watchLoadUser),
+        fork(watchFollow),
+        fork(watchUnfollow),
     ]);
 }
 
