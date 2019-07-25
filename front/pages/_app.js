@@ -9,6 +9,8 @@ import { createStore, compose, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import reducer from '../reducers';
 import rootSaga from '../sagas';
+import { LOAD_USER_REQUEST } from '../reducers/user';
+import axios from 'axios';
 
 const JsnBird = ({ Component, store, pageProps }) => {
     return (
@@ -33,13 +35,25 @@ JsnBird.propTypes = {
 };
 
 JsnBird.getInitialProps = async (context) => {
-    // console.log(context);
     const { ctx, Component } = context;
     let pageProps = {};
+    const state = ctx.store.getState();
+    const cookie = ctx.isServer ? ctx.req.headers.cookie : '';
+
+    if(ctx.isServer && cookie){
+        axios.defaults.headers.Cookie = cookie;
+    }
+
+    if( !state.user.me ){
+        ctx.store.dispatch({
+            type: LOAD_USER_REQUEST,
+        })
+    }
 
     if( Component.getInitialProps ){
         pageProps = await Component.getInitialProps(ctx);
     }
+    
     return { pageProps };
 };
 
