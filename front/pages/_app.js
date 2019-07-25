@@ -3,6 +3,7 @@ import Head from 'next/head';
 import PropTypes from 'prop-types';
 import AppLayout from '../components/AppLayout';
 import withRedux from 'next-redux-wrapper';
+import withReduxSaga from 'next-redux-saga';
 import { Provider } from 'react-redux';
 import { createStore, compose, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
@@ -52,8 +53,9 @@ const configureStore = (initialState, options) => {
             !options.isServer && typeof window.__REDUX_DEVTOOLS_EXTENSION__ !== 'undefined' ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f
         ); 
     const store = createStore(reducer, initialState, enhancer);
+    store.sagaTask = sagaMiddleware.run(rootSaga);
     sagaMiddleware.run(rootSaga);
     return store;
 };
 
-export default withRedux(configureStore)(JsnBird);
+export default withRedux(configureStore)(withReduxSaga(JsnBird));
