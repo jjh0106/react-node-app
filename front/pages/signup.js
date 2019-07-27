@@ -56,6 +56,10 @@ const Signup = () => {
         setTerm(e.target.checked);
     }, []);
 
+    if( me ){
+        return null;
+    }
+
     return (
         <Form onSubmit={onSubmit}>
             <div>

@@ -34,11 +34,13 @@ JsnBird.propTypes = {
     pageProps: PropTypes.object.isRequired,
 };
 
-JsnBird.getInitialProps = async (context) => {
+JsnBird.getInitialProps = async(context) => {
     const { ctx, Component } = context;
     let pageProps = {};
     const state = ctx.store.getState();
     const cookie = ctx.isServer ? ctx.req.headers.cookie : '';
+
+    axios.defaults.headers.Cookie = '';
 
     if(ctx.isServer && cookie){
         axios.defaults.headers.Cookie = cookie;
@@ -51,7 +53,7 @@ JsnBird.getInitialProps = async (context) => {
     }
 
     if( Component.getInitialProps ){
-        pageProps = await Component.getInitialProps(ctx);
+        pageProps = await Component.getInitialProps(ctx) || {};
     }
     
     return { pageProps };
@@ -59,10 +61,7 @@ JsnBird.getInitialProps = async (context) => {
 
 const configureStore = (initialState, options) => {
     const sagaMiddleware = createSagaMiddleware();
-    const middlewares = [sagaMiddleware, (store) => (next) => (action) => {
-        console.log(action);
-        next(action);
-    }];
+    const middlewares = [sagaMiddleware];
     const enhancer = process.env.NODE_ENV === 'production' 
         ? compose(applyMiddleware(...middlewares))
         : compose(
