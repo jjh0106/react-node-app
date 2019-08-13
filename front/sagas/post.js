@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { all, fork, takeLatest, put, delay, call } from 'redux-saga/effects';
+import { all, fork, takeLatest, put, throttle, call } from 'redux-saga/effects';
 import { 
     ADD_POST_REQUEST,
     ADD_POST_FAILURE,
@@ -151,7 +151,7 @@ function* loadMainPosts(action){
 }
 
 function* watchLoadMainPosts(){
-    yield takeLatest(LOAD_MAIN_POSTS_REQUEST, loadMainPosts)
+    yield throttle(2000, LOAD_MAIN_POSTS_REQUEST, loadMainPosts) // 쓰로틀 사용 시 첫 호출 후 설정한 초 내에 같은 리퀘스트가 호출될 수 없다.
 }
 
 //////////////////////////////////////////// load user posts ////////////////////////////////////////////
